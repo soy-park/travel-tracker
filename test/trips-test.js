@@ -52,12 +52,12 @@ describe("Hydration Repository", () => {
         "travelers": 3,
         "date": "2022/04/30",
         "duration": 18,
-        "status": "approved",
+        "status": "pending",
         "suggestedActivities": []
         }];
 
         trips = new Trips(arrayOfTrips);
-    })
+    });
 
     it('should be a function', function() {
         expect(Trips).to.be.a('function');
@@ -65,7 +65,7 @@ describe("Hydration Repository", () => {
   
     it('should be instantiated', () => {
         expect(trips).to.be.an.instanceOf(Trips);
-    })
+    });
   
     it('should have a property that contains an array of trips', () => {
         expect(trips.listOfTrips).to.deep.equal([
@@ -116,11 +116,11 @@ describe("Hydration Repository", () => {
                 "travelers": 3,
                 "date": "2022/04/30",
                 "duration": 18,
-                "status": "approved",
+                "status": "pending",
                 "suggestedActivities": []
             }
         ])
-    })
+    });
 
     it('should get past trips', () => {
         expect(trips.getPastTrips("2022/04/30")).to.deep.equal([{
@@ -134,7 +134,7 @@ describe("Hydration Repository", () => {
             "suggestedActivities": []
             }
         ])
-    })
+    });
 
     it('should get upcoming trips', () => {
         expect(trips.getUpcomingTrips()).to.deep.equal([{
@@ -176,16 +176,24 @@ describe("Hydration Repository", () => {
             "duration": 10,
             "status": "approved",
             "suggestedActivities": []
-            },
-            {
+            }
+        ])
+    });
+
+    it('should get pending trips', () => {
+        expect(trips.getPendingTrips()).to.deep.equal([{
             "id": 5,
             "userID": 42,
             "destinationID": 29,
             "travelers": 3,
             "date": "2022/04/30",
             "duration": 18,
-            "status": "approved",
+            "status": "pending",
             "suggestedActivities": []
         }])
-    })
+    });
+
+    it('should calculate total spending on trips', () => {
+        expect(trips.calculateTotalSpending().to.equal())
+    });
 })

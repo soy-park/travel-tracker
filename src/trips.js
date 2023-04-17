@@ -11,11 +11,15 @@ class Trips {
     }
 
     getUpcomingTrips() {
-        
+        return this.listOfTrips.filter((trip) => trip.status === "approved");
     }
 
     getPendingTrips() {
+        return this.listOfTrips.filter((trip) => trip.status === "pending");
+    }
 
+    calculateTotalSpending() {
+        
     }
 }
 
