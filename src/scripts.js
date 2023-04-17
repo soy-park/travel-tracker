@@ -12,13 +12,18 @@ import './images/turing-logo.png'
 
 window.addEventListener('load', loadHomePage);
 
-loadHomePage = () => {
-    fetchData("travelers");
-    // Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
-    // .then(data => {
-    //     console.log(data)
-    // })
+function loadHomePage() {
+    Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
+    .then(data => {
+        console.log(data)
+        allTravelers= new Travelers(data[0].users);
+    })
+    .then(() => {
+        
+    })
+    .catch(err => alert(err))
 }
+
 
 
 
