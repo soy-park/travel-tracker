@@ -58,4 +58,35 @@ describe("Hydration Repository", () => {
 
         trips = new Trips(arrayOfTrips);
     })
+
+    it('should be a function', function() {
+        expect(Trips).to.be.a('function');
+    });
+  
+    it('should be instantiated', () => {
+        expect(trips).to.be.an.instanceOf(Trips);
+    })
+  
+
+
+    
+    it('should return user\'s hydration data when providing an ID number', () => {
+        expect(hydrationRepo.getUserHydrationByID(32)).to.deep.equal([{
+            "userID": 32,
+            "date": "2023/03/30",
+            "numOunces": 62
+         }])
+    });
+  
+    it('should return all of the user\'s hydration data', () => {
+        expect(hydrationRepo.getUserHydrationByID(33).length).to.equal(9);
+    });
+  
+    it('should return an empty array if the given ID number is not an exact match', () => {
+        expect(hydrationRepo.getUserHydrationByID('32')).to.be.empty;
+    });
+  
+    it('should return user\'s all time hydration average', () => {
+        expect(hydrationRepo.userHydrationAllTime(33)).to.equal(62);
+    });
 })
