@@ -16,7 +16,6 @@ function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
         console.log(data)
-        allTravelers= new Travelers(data[0].users);
     })
     .then(() => {
         

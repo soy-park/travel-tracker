@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import Trips from "../src/trips";
 
 describe("Trip Class", () => {
-    let arrayOfTrips, trips, arrayOfDestinations
+    let arrayOfTrips, trips, arrayOfDestinations, destinations
 
     beforeEach(() => {
         arrayOfTrips = [{
@@ -94,6 +94,7 @@ describe("Trip Class", () => {
         }]
 
         trips = new Trips(arrayOfTrips);
+        destinations = new Destinations(arrayOfDestinations);
     });
 
     it('should be a function', function() {

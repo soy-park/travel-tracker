@@ -1,6 +1,9 @@
+import Destinations from "../src/destinations";
+
 class Trips {
-    constructor(arrayOfTrips) {
-        this.listOfTrips = arrayOfTrips
+    constructor(arrayOfTrips, arrayOfDestinations) {
+        this.listOfTrips = arrayOfTrips,
+        this.destinations = new Destinations(arrayOfDestinations)
     }
 
     getPastTrips(date) {
