@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import Trips from "../src/trips";
 
-describe("Hydration Repository", () => {
+describe("Trip Class", () => {
     let arrayOfTrips, trips, arrayOfDestinations
 
     beforeEach(() => {
