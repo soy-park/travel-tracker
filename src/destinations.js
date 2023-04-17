@@ -1,6 +1,6 @@
 class Destinations {
-    constructor() {
-
+    constructor(arrayOfDestinations) {
+        this.listOfDestinations = arrayOfDestinations
     }
 }
 

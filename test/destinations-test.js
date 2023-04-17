@@ -54,7 +54,7 @@ describe("Destinations Class", () => {
     });
   
     it('should have a property that contains an array of destinations', () => {
-        expect(trips.listOfDestinations).to.deep.equal([
+        expect(destinations.listOfDestinations).to.deep.equal([
             {
                 "id": 22,
                 "destination": "Rome, Italy",
