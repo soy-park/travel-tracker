@@ -6,32 +6,50 @@ class Trips {
         this.destinations = new Destinations(arrayOfDestinations)
     }
 
-    getPastTrips() {
-        let currentDate = new Date()
-        let day = date.getDate();
-        let month = date.getMonth() + 1;
-        let year = date.getFullYear();
-        let currentDateFormatted = `${year}/${month}/${day}`
+    getTodaysDate() {
+        let currentDate = new Date();
+        let day = currentDate.getDate();
+        let month = currentDate.getMonth() + 1;
+        let year = currentDate.getFullYear();
+        let currentDateFormatted = `${year}/${month}/${day}`;
+        return currentDateFormatted;
+    }
 
-        const sortedTripsByDate = this.listOfTrips.sort((a, b) => {
+    getPastTrips() {
+        const tripsBeforeToday = this.listOfTrips.filter((trip) => trip.date < this.getTodaysDate);
+
+        const sortedTripsByDate = tripsBeforeToday.sort((a, b) => {
             return a.date - b.date;
         })
-        return sortedTripsByDate.filter((trip) => trip.date < currentDate);
+    
+        return sortedTripsByDate;
     }
 
     getUpcomingTrips() {
-        return this.listOfTrips.filter((trip) => trip.status === "approved");
+        let currentDate = new Date();
+        let day = currentDate.getDate();
+        let month = currentDate.getMonth() + 1;
+        let year = currentDate.getFullYear();
+        let currentDateFormatted = `${year}/${month}/${day}`;
+
+        const upcomingTrips = this.listOfTrips.filter((trip) => trip.date > this.getTodaysDate);
+
+        const sortedTripsByDate = upcomingTrips.sort((a, b) => {
+            return a.date - b.date;
+        })
+    
+        return sortedTripsByDate;
     }
 
     getPendingTrips() {
-        return this.listOfTrips.filter((trip) => trip.status === "pending");
+        return this.listOfTrips.filter((trip) => trip.status === "pending" && trip.date > this.getTodaysDate);
     }
 
-    // calculateTotalSpending() {
-    //     this.listOfTrips.map((trip) => {
-    //         if (trip.destinationID === this.destinations.listOfDestinations)
-    //     })
-    // }
+    calculateTotalSpending() {
+        this.listOfTrips.map((trip) => {
+            if (trip.destinationID === this.destinations.listOfDestinations)
+        })
+    }
 }
 
 export default Trips;
