@@ -17,9 +17,6 @@ function loadHomePage() {
     .then(data => {
         console.log(data)
     })
-    .then(() => {
-        
-    })
     .catch(err => alert(err))
 }
 
