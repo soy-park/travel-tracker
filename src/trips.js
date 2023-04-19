@@ -39,11 +39,11 @@ class Trips {
         return this.listOfTrips.filter((trip) => trip.status === "pending" && trip.date > this.getTodaysDate);
     }
 
-    // calculateTotalSpending() {
-    //     this.listOfTrips.map((trip) => {
-    //         if (trip.destinationID === this.destinations.listOfDestinations)
-    //     })
-    // }
+    calculateTotalSpending() {
+        this.listOfTrips.map((trip) => {
+            if (trip.destinationID === this.destinations.listOfDestinations)
+        })
+    }
 }
 
 export default Trips;

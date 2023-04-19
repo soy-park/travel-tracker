@@ -5,6 +5,7 @@ import './css/styles.css';
 import { fetchData } from './apiCalls'
 import Trips from './trips';
 import Destinations from './destinations';
+import Travelers from './travelers';
 import './images/turing-logo.png'
 
 let allTrips, allDestinations
@@ -15,6 +16,7 @@ function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
         console.log(data)
+        allTravelers = new Travelers(data[0].travelers);
         allTrips = new Trips(data[1].trips);
         allDestinations = new Destinations(data[2].destinations);
     })
