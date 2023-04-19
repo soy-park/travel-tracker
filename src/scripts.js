@@ -1,14 +1,13 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
 import { fetchData } from './apiCalls'
 import Trips from './trips';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
+import Destinations from './destinations';
 import './images/turing-logo.png'
 
+let allTrips, allDestinations
 
 window.addEventListener('load', loadHomePage);
 
@@ -16,6 +15,8 @@ function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
         console.log(data)
+        allTrips = new Trips(data[1].trips);
+        allDestinations = new Destinations(data[2].destinations);
     })
     .catch(err => alert(err))
 }

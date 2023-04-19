@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import Trips from "../src/trips";
+import Destinations from '../src/destinations';
 
 describe("Trip Class", () => {
     let arrayOfTrips, trips, arrayOfDestinations, destinations

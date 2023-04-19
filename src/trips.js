@@ -26,12 +26,6 @@ class Trips {
     }
 
     getUpcomingTrips() {
-        let currentDate = new Date();
-        let day = currentDate.getDate();
-        let month = currentDate.getMonth() + 1;
-        let year = currentDate.getFullYear();
-        let currentDateFormatted = `${year}/${month}/${day}`;
-
         const upcomingTrips = this.listOfTrips.filter((trip) => trip.date > this.getTodaysDate);
 
         const sortedTripsByDate = upcomingTrips.sort((a, b) => {
@@ -45,11 +39,11 @@ class Trips {
         return this.listOfTrips.filter((trip) => trip.status === "pending" && trip.date > this.getTodaysDate);
     }
 
-    calculateTotalSpending() {
-        this.listOfTrips.map((trip) => {
-            if (trip.destinationID === this.destinations.listOfDestinations)
-        })
-    }
+    // calculateTotalSpending() {
+    //     this.listOfTrips.map((trip) => {
+    //         if (trip.destinationID === this.destinations.listOfDestinations)
+    //     })
+    // }
 }
 
 export default Trips;
