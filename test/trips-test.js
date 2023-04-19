@@ -245,6 +245,6 @@ describe("Trip Class", () => {
     });
 
     it('should calculate total spending on trips', () => {
-        expect(trips.calculateTotalSpending().to.equal())
+        expect(trips.calculateTotalSpending(44).to.equal(5819))
     });
 })

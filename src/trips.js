@@ -39,9 +39,15 @@ class Trips {
         return this.listOfTrips.filter((trip) => trip.status === "pending" && trip.date > this.getTodaysDate);
     }
 
-    calculateTotalSpending() {
-        this.listOfTrips.map((trip) => {
-            if (trip.destinationID === this.destinations.listOfDestinations)
+    calculateTotalSpending(id) {
+        const tripsByUserID = this.listOfTrips.filter((trip) => trip.userID === id);
+        return tripsByUserID.forEach((trip) => {
+            const desiredDestination = Destinations.listOfDestinations.filter((destination) => destination.id === trip.destinationID);
+            const totalLodgingCost = desiredDestination.estimatedLodgingCostPerDay * trip.duration;
+            const totalFlightCost = desiredDestination.estimatedFlightCostPerPerson * trip.travelers;
+            const fee = (totalLodgingCost + totalFlightCost) * 0.10 
+            const totalCost = (totalLodgingCost + totalFlightCost) + fee;
+            return totalCost;
         })
     }
 }

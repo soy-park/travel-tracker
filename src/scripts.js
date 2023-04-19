@@ -8,7 +8,7 @@ import Destinations from './destinations';
 import Travelers from './travelers';
 import './images/turing-logo.png'
 
-let allTrips, allDestinations
+let allTravelers, allTrips, allDestinations
 
 window.addEventListener('load', loadHomePage);
 

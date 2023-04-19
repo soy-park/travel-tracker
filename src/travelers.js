@@ -1,7 +1,7 @@
 class Travelers {
-    constructor(
-
-    )
+    constructor(arrayOfTravelers) {
+        this.listOfTravelers = arrayOfTravelers;
+    }
 }
 
 
