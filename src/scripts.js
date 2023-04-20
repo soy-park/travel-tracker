@@ -8,6 +8,8 @@ import Destinations from './destinations';
 import Travelers from './travelers';
 import './images/turing-logo.png'
 
+const pendingTrips = document.querySelector('.pending-trips');
+
 let allTravelers, allTrips, allDestinations, randomId
 
 window.addEventListener('load', loadHomePage);
@@ -32,6 +34,12 @@ function generateRandomId() {
 }
 
 function displayPastTrips() {
+    allTrips.getPastTrips().map((trip) => {
+        pendingTrips.innerHTML = `<p>Destination: ${}</p>
+        <p>Travelers: ${}</p>
+        <p>Date: ${}</p>
+        <p>Duration: ${}</p>`
+    })
     
 }
 

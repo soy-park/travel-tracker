@@ -9,7 +9,7 @@ class Trips {
     }
 
     getTripsByUserID(id) {
-        this.listOfTrips.filter((trip) => trip.userID === id);
+        return this.listOfTrips.filter((trip) => trip.userID === id);
     }
 
     getTodaysDate() {
