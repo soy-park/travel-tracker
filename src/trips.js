@@ -75,6 +75,30 @@ class Trips {
        
         return grandTotal;
     }
+
+    calculateSpendingThisYear() {
+        const tripsIn2023 = this.tripsByID.filter((trip) => {
+            const tripDate = moment(trip.date);
+            if (tripDate.isBetween("2023/01/01", "2023/12/31")) {
+                return trip;
+            }
+        })
+        const tripTotalCost = tripsIn2023.map((trip) => {
+            const desiredDestination = this.destinations.listOfDestinations.find((destination) => destination.id === trip.destinationID);
+            const totalLodgingCost = desiredDestination.estimatedLodgingCostPerDay * trip.duration;
+            const totalFlightCost = desiredDestination.estimatedFlightCostPerPerson * trip.travelers;
+            const fee = (totalLodgingCost + totalFlightCost) * 0.10;
+            const totalCost = (totalLodgingCost + totalFlightCost) + fee;
+            return totalCost;
+        })
+
+        const grandTotal = tripTotalCost.reduce((acc, tripCost) => {
+            acc += tripCost;
+            return acc;
+        }, 0)
+       
+        return grandTotal;
+    }
 }
 
 export default Trips;
