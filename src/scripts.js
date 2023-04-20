@@ -13,10 +13,17 @@ const pendingTrips = document.querySelector('.pending-trips');
 const grandTotal = document.querySelector('.grand-total');
 const totalThisYear = document.querySelector('.this-year-total');
 const destinationList = document.getElementById('destination');
+const estimate = document.querySelector('.estimate');
+const dateInput = document.getElementById('date');
+const durationInput = document.getElementById('duration');
+const travelersInput = document.getElementById('travelers');
+const destinationInput = document.getElementById('destination');
+const submitBtn = document.querySelector('.submit-button');
 
 let allTravelers, allTrips, allDestinations, randomId
 
 window.addEventListener('load', loadHomePage);
+submitBtn.addEventListener('click', postNewTrip);
 
 function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
@@ -30,9 +37,14 @@ function loadHomePage() {
         displayPendingTrips();
         displayPastTrips();
         renderListOfDestinations();
+        // displayEstimate();
         displayTotalSpending();
     })
     .catch(err => alert(err))
+}
+
+function postNewTrip() {
+
 }
 
 function generateRandomId() {
