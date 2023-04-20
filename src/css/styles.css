@@ -79,6 +79,19 @@ aside {
   margin-bottom: 1.5em;
 }
 
+.submit-button {
+  margin-left: 14em;
+  margin-top: 3em;
+  padding: 0.4em 1em 0.4em 1em;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.submit-button:hover {
+  background-color: rgb(95, 214, 125);
+  cursor: pointer;
+}
+
 aside p {
   font-weight: bold;
   font-size: 22px;
