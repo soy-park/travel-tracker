@@ -76,12 +76,15 @@ aside {
   font-size: 22px;
 }
 
-.past-trips {
+.past-trips, 
+.total-amount-spent, 
+.total-amount-this-year {
   text-align: center;
 }
 
 .past-trip-box, 
-.pending-trip-box {
+.pending-trip-box, 
+.third-article div {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   padding: 0.5em 0em 1em 1.5em;
