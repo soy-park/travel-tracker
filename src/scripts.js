@@ -8,7 +8,7 @@ import Destinations from './destinations';
 import Travelers from './travelers';
 import './images/turing-logo.png'
 
-const pendingTrips = document.querySelector('.pending-trips');
+const pastTrips = document.querySelector('.past-trips-list');
 
 let allTravelers, allTrips, allDestinations, randomId
 
@@ -17,14 +17,14 @@ window.addEventListener('load', loadHomePage);
 function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
-        randomId = generateRandomId();
         allTravelers = new Travelers(data[0].travelers);
+        randomId = generateRandomId();
         allTrips = new Trips(randomId, data[1].trips, data[2].destinations);
         allDestinations = new Destinations(data[2].destinations);
     })
     .then(() => {
         displayPastTrips();
-        displayUpcomingTrips();
+        // displayUpcomingTrips();
     })
     .catch(err => alert(err))
 }
@@ -33,15 +33,23 @@ function generateRandomId() {
     return Math.floor(Math.random() * allTravelers.listOfTravelers.length);
 }
 
-function displayPastTrips() {
+function displayPastTrips(randomId) {
+    console.log(allTrips.getPastTrips())
     allTrips.getPastTrips().map((trip) => {
-        pendingTrips.innerHTML = `<p>Destination: ${}</p>
-        <p>Travelers: ${}</p>
-        <p>Date: ${}</p>
-        <p>Duration: ${}</p>`
+        pastTrips.innerHTML += `<p>Travelers: ${trip.travelers}</p>
+            <p>Date: ${trip.date}</p>
+            <p>Duration: ${trip.duration}</p><br>`
     })
-    
 }
 
 
 
+  // pendingTrips.innerHTML = `<h3 class="pending">Pending</h3>`
+    // return allTrips.getPastTrips().map((trip) => {
+    //     return allDestinations.getDestinationsByID(trip.destinationID).map(destination => {
+    //         pendingTrips.innerHTML += `<p>Destination: ${destination.destination}</p>
+    //         <p>Travelers: ${trip.travelers}</p>
+    //         <p>Date: ${trip.date}</p>
+    //         <p>Duration: ${trip.duration}</p>`
+    //     })
+    // })
