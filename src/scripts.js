@@ -36,9 +36,13 @@ function generateRandomId() {
 function displayPastTrips(randomId) {
     console.log(allTrips.getPastTrips())
     allTrips.getPastTrips().map((trip) => {
-        pastTrips.innerHTML += `<p>Travelers: ${trip.travelers}</p>
+        const destinationById = allDestinations.getDestinationsByID(trip.destinationID);
+        destinationById.map((destination) => {
+            pastTrips.innerHTML += `<p>Destination: ${destination.destination}</p>
+            <p>Travelers: ${trip.travelers}</p>
             <p>Date: ${trip.date}</p>
             <p>Duration: ${trip.duration}</p><br>`
+        })
     })
 }
 
