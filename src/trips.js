@@ -1,4 +1,5 @@
 import Destinations from "../src/destinations";
+import moment from "moment";
 
 class Trips {
     constructor(arrayOfTrips, arrayOfDestinations) {
@@ -16,39 +17,51 @@ class Trips {
     }
 
     getPastTrips() {
-        const tripsBeforeToday = this.listOfTrips.filter((trip) => trip.date < this.getTodaysDate);
-
-        const sortedTripsByDate = tripsBeforeToday.sort((a, b) => {
-            return a.date - b.date;
+        const tripsBeforeToday = this.listOfTrips.filter((trip) => {
+            const tripDate = moment(trip.date);
+            if (tripDate.isBefore(this.getTodaysDate())) {
+                return trip;
+            }
         })
-    
-        return sortedTripsByDate;
+        return tripsBeforeToday;
     }
 
     getUpcomingTrips() {
-        const upcomingTrips = this.listOfTrips.filter((trip) => trip.date > this.getTodaysDate);
-
-        const sortedTripsByDate = upcomingTrips.sort((a, b) => {
-            return a.date - b.date;
+        const upcomingTrips = this.listOfTrips.filter((trip) => {
+            const tripDate = moment(trip.date);
+            if (tripDate.isAfter(this.getTodaysDate()))
+            return trip;
         })
-    
-        return sortedTripsByDate;
+        return upcomingTrips;
     }
 
     getPendingTrips() {
-        return this.listOfTrips.filter((trip) => trip.status === "pending" && trip.date > this.getTodaysDate);
+        const pendingTrips = this.listOfTrips.filter((trip) => {
+            const tripDate = moment(trip.date);
+            if (tripDate.isAfter(this.getTodaysDate()) && trip.status === "pending")
+            return trip;
+        })
+        return pendingTrips;
     }
 
     calculateTotalSpending(id) {
         const tripsByUserID = this.listOfTrips.filter((trip) => trip.userID === id);
-        return tripsByUserID.forEach((trip) => {
-            const desiredDestination = Destinations.listOfDestinations.filter((destination) => destination.id === trip.destinationID);
+
+        const tripTotalCost = tripsByUserID.map((trip) => {
+            const desiredDestination = this.destinations.listOfDestinations.find((destination) => destination.id === trip.destinationID);
             const totalLodgingCost = desiredDestination.estimatedLodgingCostPerDay * trip.duration;
             const totalFlightCost = desiredDestination.estimatedFlightCostPerPerson * trip.travelers;
             const fee = (totalLodgingCost + totalFlightCost) * 0.10 
             const totalCost = (totalLodgingCost + totalFlightCost) + fee;
             return totalCost;
         })
+
+        const grandTotal = tripTotalCost.reduce((acc, tripCost) => {
+            acc += tripCost;
+            return acc;
+        }, 0)
+       
+        return grandTotal;
     }
 }
 

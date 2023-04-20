@@ -94,7 +94,7 @@ describe("Trip Class", () => {
             "alt": "people buying oranges and other fruit from a street vendor"
         }]
 
-        trips = new Trips(arrayOfTrips);
+        trips = new Trips(arrayOfTrips, arrayOfDestinations);
         destinations = new Destinations(arrayOfDestinations);
     });
 
@@ -245,6 +245,6 @@ describe("Trip Class", () => {
     });
 
     it('should calculate total spending on trips', () => {
-        expect(trips.calculateTotalSpending(44).to.equal(5819))
+        expect(trips.calculateTotalSpending(44)).to.equal(5819)
     });
 })
