@@ -66,6 +66,7 @@ aside {
 }
 
 form {
+  border: 7px solid rgb(243, 224, 99);
   padding: 0.5em 1em 2em 2em;
 }
 
@@ -110,22 +111,22 @@ form {
   color: rgb(239, 117, 4);
 }
 
-.grand-total, 
-.this-year-total {
-  font-size: 30px;
-  font-weight: bold;
-  color: rgb(4, 175, 4);
-  text-align: center;
-}
-
 .trip-request {
   font-size: 2em;
   text-align: center;
   margin-bottom: 1.5em;
 }
 
+label {
+  font-size: 20px;
+}
+
+input {
+  margin-bottom: 2em;
+}
+
 .submit-button {
-  margin-left: 18em;
+  margin-left: 20em;
   margin-top: 3em;
   padding: 0.4em 1em 0.4em 1em;
   font-size: 20px;
@@ -137,8 +138,10 @@ form {
   cursor: pointer;
 }
 
-aside p {
+.grand-total, 
+.this-year-total {
+  font-size: 30px;
   font-weight: bold;
-  font-size: 22px;
-  padding-bottom: 1em;
+  color: rgb(4, 175, 4);
+  text-align: center;
 }
