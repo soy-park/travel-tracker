@@ -27,6 +27,7 @@ body {
 aside {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
+  height: 33em;
 }
 
 .first-article,
@@ -34,6 +35,7 @@ aside {
 .third-article,
 aside {
   padding: 1em 2em 1em 2em;
+  margin-bottom: 3em;
 }
 
 .first-article {
@@ -42,13 +44,11 @@ aside {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
-  margin-bottom: 3em;
 }
 
 .second-article {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
-  margin-bottom: 3em;
 }
 
 .third-article {
@@ -76,11 +76,15 @@ aside {
   font-size: 22px;
 }
 
-.past-trips {
+.past-trips, 
+.total-amount-spent, 
+.total-amount-this-year {
   text-align: center;
 }
 
-.past-trip-box {
+.past-trip-box, 
+.pending-trip-box, 
+.third-article div {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   padding: 0.5em 0em 1em 1.5em;
@@ -89,6 +93,18 @@ aside {
 
 .past-destination {
   color: rgb(45, 116, 222);
+}
+
+.pending-destination {
+  color: rgb(239, 117, 4);
+}
+
+.grand-total, 
+.this-year-total {
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(4, 175, 4);
+  text-align: center;
 }
 
 .trip-request {

@@ -9,6 +9,9 @@ import Travelers from './travelers';
 import './images/turing-logo.png'
 
 const pastTrips = document.querySelector('.past-trips-list');
+const pendingTrips = document.querySelector('.pending-trips');
+const grandTotal = document.querySelector('.grand-total');
+const totalThisYear = document.querySelector('.this-year-total');
 
 let allTravelers, allTrips, allDestinations, randomId
 
@@ -24,7 +27,8 @@ function loadHomePage() {
     })
     .then(() => {
         displayPastTrips();
-        // displayUpcomingTrips();
+        displayPendingTrips();
+        displayTotalSpending();
     })
     .catch(err => alert(err))
 }
@@ -47,4 +51,25 @@ function displayPastTrips() {
             </article>`
         })
     })
+}
+
+function displayPendingTrips() {
+    allTrips.getPendingTrips().map((trip) => {
+        const destinationById = allDestinations.getDestinationsByID(trip.destinationID);
+        destinationById.map((destination) => {
+            pendingTrips.innerHTML += `<article class=pending-trip-box>
+                <p class="pending-destination"><strong>${destination.destination}</strong></p>
+                <ul>
+                    <li>Travelers: ${trip.travelers}</li>
+                    <li>Date: ${trip.date}</li>
+                    <li>Duration: ${trip.duration} days</li>
+                </ul>
+            </article>`
+        })
+    })
+}
+
+function displayTotalSpending() {
+    grandTotal.innerText = `$${allTrips.calculateTotalSpending()}`
+    totalThisYear.innerText = `$${allTrips.calculateSpendingThisYear()}`
 }
