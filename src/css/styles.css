@@ -1,3 +1,99 @@
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  background-image: url(https://img.atlasobscura.com/8WQhQ0SjlrVkKHDTqElxCviWT4wt9VeuDr8LWrgex8A/rs:fill:12000:12000/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy8zMjlmMmE0Yzgw/NDZkZjFlZDlfRDNL/NTFKLmpwZw.jpg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0em;
+  margin-right: 7em;
+}
+
+aside {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+
+.first-article,
+.second-article,
+.third-article,
+aside {
+  padding: 1em 2em 1em 2em;
+}
+
+.first-article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  margin-bottom: 5em;
+}
+
+.second-article {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  margin-bottom: 5em;
+}
+
+.third-article {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+
+.pending-and-approved {
+  display: flex;
+  flex-direction: row;
+}
+
+.my-trips {
+  font-size: 5em;
+}
+
+.past-trips {
+  text-align: center;
+}
+
+.pending {
+  margin-right: 10em;
+  font-size: 22px;
+}
+
+.approved {
+  font-size: 22px;
+}
+
+.trip-request {
+  font-size: 2em;
+  margin-bottom: 1.5em;
+}
+
+.submit-button {
+  margin-left: 14em;
+  margin-top: 3em;
+  padding: 0.4em 1em 0.4em 1em;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.submit-button:hover {
+  background-color: rgb(95, 214, 125);
+  cursor: pointer;
+}
+
+aside p {
+  font-weight: bold;
+  font-size: 22px;
+  padding-bottom: 1em;
 }

@@ -16,12 +16,19 @@ function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
         allTravelers = new Travelers(data[0].travelers);
-        allTrips = new Trips(data[1].trips);
+        allTrips = new Trips(data[1].trips, data[2].destinations);
         allDestinations = new Destinations(data[2].destinations);
+    })
+    .then(() => {
+        displayPastTrips();
+        displayUpcomingTrips();
     })
     .catch(err => alert(err))
 }
 
+function displayPastTrips() {
+    
+}
 
 
 
