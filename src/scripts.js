@@ -8,7 +8,7 @@ import Destinations from './destinations';
 import Travelers from './travelers';
 import './images/turing-logo.png'
 
-const pendingTrips = document.querySelector('.pending-trips');
+const pastTrips = document.querySelector('.past-trips-list');
 
 let allTravelers, allTrips, allDestinations, randomId
 
@@ -17,14 +17,14 @@ window.addEventListener('load', loadHomePage);
 function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
-        randomId = generateRandomId();
         allTravelers = new Travelers(data[0].travelers);
+        randomId = generateRandomId();
         allTrips = new Trips(randomId, data[1].trips, data[2].destinations);
         allDestinations = new Destinations(data[2].destinations);
     })
     .then(() => {
         displayPastTrips();
-        displayUpcomingTrips();
+        // displayUpcomingTrips();
     })
     .catch(err => alert(err))
 }
@@ -35,13 +35,16 @@ function generateRandomId() {
 
 function displayPastTrips() {
     allTrips.getPastTrips().map((trip) => {
-        pendingTrips.innerHTML = `<p>Destination: ${}</p>
-        <p>Travelers: ${}</p>
-        <p>Date: ${}</p>
-        <p>Duration: ${}</p>`
+        const destinationById = allDestinations.getDestinationsByID(trip.destinationID);
+        destinationById.map((destination) => {
+            pastTrips.innerHTML += `<article class=past-trip-box>
+                <p class="past-destination"><strong>${destination.destination}</strong></p>
+                <ul>
+                    <li>Travelers: ${trip.travelers}</li>
+                    <li>Date: ${trip.date}</li>
+                    <li>Duration: ${trip.duration} days</li>
+                </ul>
+            </article>`
+        })
     })
-    
 }
-
-
-
