@@ -8,15 +8,16 @@ import Destinations from './destinations';
 import Travelers from './travelers';
 import './images/turing-logo.png'
 
-let allTravelers, allTrips, allDestinations
+let allTravelers, allTrips, allDestinations, randomId
 
 window.addEventListener('load', loadHomePage);
 
 function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
+        randomId = generateRandomId();
         allTravelers = new Travelers(data[0].travelers);
-        allTrips = new Trips(data[1].trips, data[2].destinations);
+        allTrips = new Trips(randomId, data[1].trips, data[2].destinations);
         allDestinations = new Destinations(data[2].destinations);
     })
     .then(() => {
@@ -24,6 +25,10 @@ function loadHomePage() {
         displayUpcomingTrips();
     })
     .catch(err => alert(err))
+}
+
+function generateRandomId() {
+    return Math.floor(Math.random() * allTravelers.listOfTravelers.length);
 }
 
 function displayPastTrips() {
