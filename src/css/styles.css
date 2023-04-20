@@ -27,6 +27,7 @@ body {
 aside {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
+  height: 33em;
 }
 
 .first-article,
@@ -80,7 +81,8 @@ aside {
   text-align: center;
 }
 
-.past-trip-box {
+.past-trip-box, 
+.pending-trip-box {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   padding: 0.5em 0em 1em 1.5em;
@@ -89,6 +91,10 @@ aside {
 
 .past-destination {
   color: rgb(45, 116, 222);
+}
+
+.pending-destination {
+  color: rgb(239, 117, 4);
 }
 
 .trip-request {
