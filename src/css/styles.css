@@ -24,10 +24,10 @@ body {
   margin-right: 7em;
 }
 
-aside {
+form, 
+.third-article {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
-  height: 33em;
 }
 
 .first-article,
@@ -35,7 +35,7 @@ aside {
 .third-article,
 aside {
   padding: 1em 2em 1em 2em;
-  margin-bottom: 3em;
+  margin-bottom: 2em;
 }
 
 .first-article {
@@ -56,6 +56,11 @@ aside {
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
+  margin-top: 2em;
+}
+
+form {
+  padding: 0.5em 1em 2em 2em;
 }
 
 .pending-and-approved {
@@ -113,7 +118,7 @@ aside {
 }
 
 .submit-button {
-  margin-left: 14em;
+  margin-left: 18em;
   margin-top: 3em;
   padding: 0.4em 1em 0.4em 1em;
   font-size: 20px;
