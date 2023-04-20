@@ -14,14 +14,18 @@ body {
 .main-section {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .left-section {
   display: flex;
   flex-direction: column;
   margin-left: 0em;
-  margin-right: 7em;
+  margin-right: 4em;
+}
+
+aside {
+  margin-right: 4em;
 }
 
 form, 
@@ -44,11 +48,13 @@ aside {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
+  margin-left: 3em;
 }
 
 .second-article {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
+  margin-left: 3em;
 }
 
 .third-article {
@@ -114,6 +120,7 @@ form {
 
 .trip-request {
   font-size: 2em;
+  text-align: center;
   margin-bottom: 1.5em;
 }
 
