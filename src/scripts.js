@@ -23,7 +23,7 @@ const submitBtn = document.querySelector('.submit-button');
 let allTravelers, allTrips, allDestinations, randomId
 
 window.addEventListener('load', loadHomePage);
-submitBtn.addEventListener('click', postNewTrip);
+submitBtn.addEventListener('click', renderNewTrip);
 
 function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
@@ -43,8 +43,13 @@ function loadHomePage() {
     .catch(err => alert(err))
 }
 
-function postNewTrip() {
+function renderNewTrip(event) {
+    event.preventDefault();
+    validateFormInput();
+}
 
+function validateFormInput() {
+    
 }
 
 function generateRandomId() {
