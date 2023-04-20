@@ -38,10 +38,12 @@ function displayPastTrips() {
         const destinationById = allDestinations.getDestinationsByID(trip.destinationID);
         destinationById.map((destination) => {
             pastTrips.innerHTML += `<article class=past-trip-box>
-            <p>Destination: ${destination.destination}</p>
-            <p>Travelers: ${trip.travelers}</p>
-            <p>Date: ${trip.date}</p>
-            <p>Duration: ${trip.duration}</p><br>
+                <p>${destination.destination}</p>
+                <ul>
+                    <li>Travelers: ${trip.travelers}</li>
+                    <li>Date: ${trip.date}</li>
+                    <li>Duration: ${trip.duration} days</li>
+                </ul>
             </article>`
         })
     })
