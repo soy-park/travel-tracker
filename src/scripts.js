@@ -33,27 +33,16 @@ function generateRandomId() {
     return Math.floor(Math.random() * allTravelers.listOfTravelers.length);
 }
 
-function displayPastTrips(randomId) {
-    console.log(allTrips.getPastTrips())
+function displayPastTrips() {
     allTrips.getPastTrips().map((trip) => {
         const destinationById = allDestinations.getDestinationsByID(trip.destinationID);
         destinationById.map((destination) => {
-            pastTrips.innerHTML += `<p>Destination: ${destination.destination}</p>
+            pastTrips.innerHTML += `<article class=past-trip-box>
+            <p>Destination: ${destination.destination}</p>
             <p>Travelers: ${trip.travelers}</p>
             <p>Date: ${trip.date}</p>
-            <p>Duration: ${trip.duration}</p><br>`
+            <p>Duration: ${trip.duration}</p><br>
+            </article>`
         })
     })
 }
-
-
-
-  // pendingTrips.innerHTML = `<h3 class="pending">Pending</h3>`
-    // return allTrips.getPastTrips().map((trip) => {
-    //     return allDestinations.getDestinationsByID(trip.destinationID).map(destination => {
-    //         pendingTrips.innerHTML += `<p>Destination: ${destination.destination}</p>
-    //         <p>Travelers: ${trip.travelers}</p>
-    //         <p>Date: ${trip.date}</p>
-    //         <p>Duration: ${trip.duration}</p>`
-    //     })
-    // })

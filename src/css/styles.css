@@ -65,10 +65,6 @@ aside {
   font-size: 5em;
 }
 
-.past-trips {
-  text-align: center;
-}
-
 .pending {
   margin-right: 10em;
   font-size: 22px;
@@ -76,6 +72,18 @@ aside {
 
 .approved {
   font-size: 22px;
+}
+
+.past-trips {
+  text-align: center;
+}
+
+.past-trip-box {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding-top: 1em;
+  padding-left: 1.5em;
+  margin-bottom: 2em;
 }
 
 .trip-request {
