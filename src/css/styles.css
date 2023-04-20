@@ -99,7 +99,8 @@ aside {
   color: rgb(239, 117, 4);
 }
 
-.grand-total {
+.grand-total, 
+.this-year-total {
   font-size: 30px;
   font-weight: bold;
   color: rgb(4, 175, 4);

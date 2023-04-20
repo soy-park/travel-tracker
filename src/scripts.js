@@ -11,6 +11,7 @@ import './images/turing-logo.png'
 const pastTrips = document.querySelector('.past-trips-list');
 const pendingTrips = document.querySelector('.pending-trips');
 const grandTotal = document.querySelector('.grand-total');
+const totalThisYear = document.querySelector('.this-year-total');
 
 let allTravelers, allTrips, allDestinations, randomId
 
@@ -70,4 +71,5 @@ function displayPendingTrips() {
 
 function displayTotalSpending() {
     grandTotal.innerText = `$${allTrips.calculateTotalSpending()}`
+    totalThisYear.innerText = `$${allTrips.calculateSpendingThisYear()}`
 }
