@@ -1,8 +1,9 @@
 import { expect } from 'chai';
 import Trips from "../src/trips";
+import Destinations from '../src/destinations';
 
 describe("Trip Class", () => {
-    let arrayOfTrips, trips, arrayOfDestinations
+    let arrayOfTrips, trips, arrayOfDestinations, destinations
 
     beforeEach(() => {
         arrayOfTrips = [{
@@ -10,9 +11,9 @@ describe("Trip Class", () => {
             "userID": 44,
             "destinationID": 49,
             "travelers": 1,
-            "date": "2022/09/16",
+            "date": "2023/09/16",
             "duration": 8,
-            "status": "approved",
+            "status": "pending",
             "suggestedActivities": []
         },
         {
@@ -20,9 +21,9 @@ describe("Trip Class", () => {
             "userID": 35,
             "destinationID": 25,
             "travelers": 5,
-            "date": "2022/10/04",
+            "date": "2023/10/04",
             "duration": 18,
-            "status": "approved",
+            "status": "pending",
             "suggestedActivities": []
         },
         {
@@ -93,7 +94,8 @@ describe("Trip Class", () => {
             "alt": "people buying oranges and other fruit from a street vendor"
         }]
 
-        trips = new Trips(arrayOfTrips);
+        trips = new Trips(arrayOfTrips, arrayOfDestinations);
+        destinations = new Destinations(arrayOfDestinations);
     });
 
     it('should be a function', function() {
@@ -111,9 +113,9 @@ describe("Trip Class", () => {
                 "userID": 44,
                 "destinationID": 49,
                 "travelers": 1,
-                "date": "2022/09/16",
+                "date": "2023/09/16",
                 "duration": 8,
-                "status": "approved",
+                "status": "pending",
                 "suggestedActivities": []
             },
             {
@@ -121,9 +123,9 @@ describe("Trip Class", () => {
                 "userID": 35,
                 "destinationID": 25,
                 "travelers": 5,
-                "date": "2022/10/04",
+                "date": "2023/10/04",
                 "duration": 18,
-                "status": "approved",
+                "status": "pending",
                 "suggestedActivities": []
             },
             {
@@ -160,15 +162,36 @@ describe("Trip Class", () => {
     });
 
     it('should get past trips', () => {
-        expect(trips.getPastTrips("2022/04/30")).to.deep.equal([{
-            "id": 4,
-            "userID": 43,
-            "destinationID": 14,
-            "travelers": 2,
-            "date": "2022/02/25",
-            "duration": 10,
-            "status": "approved",
-            "suggestedActivities": []
+        expect(trips.getPastTrips()).to.deep.equal([
+            {
+                "id": 3,
+                "userID": 3,
+                "destinationID": 22,
+                "travelers": 4,
+                "date": "2022/05/22",
+                "duration": 17,
+                "status": "approved",
+                "suggestedActivities": []
+            },
+            {
+                "id": 4,
+                "userID": 43,
+                "destinationID": 14,
+                "travelers": 2,
+                "date": "2022/02/25",
+                "duration": 10,
+                "status": "approved",
+                "suggestedActivities": []
+            },
+            {
+                "id": 5,
+                "userID": 42,
+                "destinationID": 29,
+                "travelers": 3,
+                "date": "2022/04/30",
+                "duration": 18,
+                "status": "pending",
+                "suggestedActivities": []
             }
         ])
     });
@@ -179,9 +202,9 @@ describe("Trip Class", () => {
             "userID": 44,
             "destinationID": 49,
             "travelers": 1,
-            "date": "2022/09/16",
+            "date": "2023/09/16",
             "duration": 8,
-            "status": "approved",
+            "status": "pending",
             "suggestedActivities": []
             },
             {
@@ -189,29 +212,9 @@ describe("Trip Class", () => {
             "userID": 35,
             "destinationID": 25,
             "travelers": 5,
-            "date": "2022/10/04",
+            "date": "2023/10/04",
             "duration": 18,
-            "status": "approved",
-            "suggestedActivities": []
-            },
-            {
-            "id": 3,
-            "userID": 3,
-            "destinationID": 22,
-            "travelers": 4,
-            "date": "2022/05/22",
-            "duration": 17,
-            "status": "approved",
-            "suggestedActivities": []
-            },
-            {
-            "id": 4,
-            "userID": 43,
-            "destinationID": 14,
-            "travelers": 2,
-            "date": "2022/02/25",
-            "duration": 10,
-            "status": "approved",
+            "status": "pending",
             "suggestedActivities": []
             }
         ])
@@ -219,18 +222,29 @@ describe("Trip Class", () => {
 
     it('should get pending trips', () => {
         expect(trips.getPendingTrips()).to.deep.equal([{
-            "id": 5,
-            "userID": 42,
-            "destinationID": 29,
-            "travelers": 3,
-            "date": "2022/04/30",
+            "id": 1,
+            "userID": 44,
+            "destinationID": 49,
+            "travelers": 1,
+            "date": "2023/09/16",
+            "duration": 8,
+            "status": "pending",
+            "suggestedActivities": []
+            },
+            {
+            "id": 2,
+            "userID": 35,
+            "destinationID": 25,
+            "travelers": 5,
+            "date": "2023/10/04",
             "duration": 18,
             "status": "pending",
             "suggestedActivities": []
-        }])
+            }
+        ])
     });
 
     it('should calculate total spending on trips', () => {
-        expect(trips.calculateTotalSpending().to.equal())
+        expect(trips.calculateTotalSpending(44)).to.equal(5819)
     });
 })
