@@ -30,7 +30,7 @@ class Trips {
         const upcomingTrips = this.listOfTrips.filter((trip) => {
             const tripDate = moment(trip.date);
             if (tripDate.isAfter(this.getTodaysDate()))
-            return trip;
+                return trip;
         })
         return upcomingTrips;
     }
@@ -39,9 +39,18 @@ class Trips {
         const pendingTrips = this.listOfTrips.filter((trip) => {
             const tripDate = moment(trip.date);
             if (tripDate.isAfter(this.getTodaysDate()) && trip.status === "pending")
-            return trip;
+                return trip;
         })
         return pendingTrips;
+    }
+
+    getApprovedTrips() {
+        const approvedTrips = this.listOfTrips.filter((trip) => {
+            const tripDate = moment(trip.date);
+            if (tripDate.isAfter(this.getTodaysDate()) && trip.status === "approved")
+                return trip;
+        })
+        return approvedTrips;
     }
 
     calculateTotalSpending(id) {
