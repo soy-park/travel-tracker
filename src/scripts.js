@@ -12,6 +12,7 @@ const pastTrips = document.querySelector('.past-trips-list');
 const pendingTrips = document.querySelector('.pending-trips');
 const grandTotal = document.querySelector('.grand-total');
 const totalThisYear = document.querySelector('.this-year-total');
+const destinationList = document.getElementById('destination');
 
 let allTravelers, allTrips, allDestinations, randomId
 
@@ -26,8 +27,9 @@ function loadHomePage() {
         allDestinations = new Destinations(data[2].destinations);
     })
     .then(() => {
-        displayPastTrips();
         displayPendingTrips();
+        displayPastTrips();
+        renderListOfDestinations();
         displayTotalSpending();
     })
     .catch(err => alert(err))
@@ -66,6 +68,12 @@ function displayPendingTrips() {
                 </ul>
             </article>`
         })
+    })
+}
+
+function renderListOfDestinations() {
+    allDestinations.listOfDestinations.map((destination) => {
+        destinationList.innerHTML += `<option value="${destination.destination}">${destination.destination}</option>`;
     })
 }
 

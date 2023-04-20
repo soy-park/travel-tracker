@@ -29,10 +29,41 @@
     <aside>
       <form>
         <h2 class="trip-request">TRIP REQUEST</h2>
-        <p class="choose-date">Date</p>
-        <p class="choose-duration">Duration</p>
-        <p class="choose-travelers">Travelers</p>
-        <p class="choose-destination">Destination</p>
+        <label for="date" class="choose-date">Date:</label><br>
+        <input type="text" id="date" name="date"><br>
+        <label for="duration" class="choose-duration">Duration:</label><br>
+        <input type="text" id="duration" name="duration">
+        <label for="travelers" class="choose-travelers">Travelers:</label><br>
+        <input type="text" id="travelers" name="travelers">
+        <label for="destination" class="choose-destination">Destination:</label><br>
+        <select id="destination" name="destination">
+          <!-- <option value="volvo">Lima, Peru</option>
+          <option value="saab">Stockholm, Sweden</option>
+          <option value="opel">Sydney, Austrailia</option>
+          <option value="audi">Cartagena, Colombia</option>
+          <option value="volvo">Madrid, Spain</option>
+          <option value="saab">Jakarta, Indonesia</option>
+          <option value="opel">Paris, France</option>
+          <option value="audi">Tokyo, Japan</option>
+          <option value="volvo">Amsterdam, Netherlands</option>
+          <option value="saab">Toronto, Canada</option>
+          <option value="opel">Mikonos, Greece</option>
+          <option value="audi">Wellington, New Zealand</option>
+          <option value="volvo">St. Petersburg, Russia</option>
+          <option value="saab">Marrakesh, Morocco</option>
+          <option value="opel">Manila, Philippines</option>
+          <option value="audi">Bangkok, Thailand</option>
+          <option value="opel">Jaipur, India</option>
+          <option value="audi">Cape Town, South Africa</option>
+          <option value="volvo"></option>
+          <option value="saab">Toronto, Canada</option>
+          <option value="opel">Mikonos, Greece</option>
+          <option value="audi">Wellington, New Zealand</option>
+          <option value="volvo">St. Petersburg, Russia</option>
+          <option value="saab">Marrakesh, Morocco</option>
+          <option value="opel">Manila, Philippines</option>
+          <option value="audi">Bangkok, Thailand</option> -->
+        </select>
         <button class="submit-button">Submit</button>
       </form>
       <article class="third-article">
@@ -41,7 +72,7 @@
           <p class="grand-total"></p>
         </div>
         <div class="total-spending-this-year">
-          <h2 class="total-amount-this-year">Total Amount I Have Spent on Trips in 2023:</h2>
+          <h2 class="total-amount-this-year">Total Amount I Have Spent on Trips This Year:</h2>
           <p class="this-year-total"></p>
         </div>
       </article>
