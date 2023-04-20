@@ -247,4 +247,8 @@ describe("Trip Class", () => {
     it('should calculate total spending on trips', () => {
         expect(trips.calculateTotalSpending(44)).to.equal(5819)
     });
+
+    it('should not calculate total spending if given invalid id', () => {
+        expect(trips.calculateTotalSpending(100)).to.equal(0)
+    });
 })
