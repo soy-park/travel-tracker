@@ -59,11 +59,11 @@ class Trips {
     }
 
     calculateTotalSpending() {
-        const tripTotalCost = tripsByUserID.map((trip) => {
+        const tripTotalCost = this.tripsByID.map((trip) => {
             const desiredDestination = this.destinations.listOfDestinations.find((destination) => destination.id === trip.destinationID);
             const totalLodgingCost = desiredDestination.estimatedLodgingCostPerDay * trip.duration;
             const totalFlightCost = desiredDestination.estimatedFlightCostPerPerson * trip.travelers;
-            const fee = (totalLodgingCost + totalFlightCost) * 0.10 
+            const fee = (totalLodgingCost + totalFlightCost) * 0.10;
             const totalCost = (totalLodgingCost + totalFlightCost) + fee;
             return totalCost;
         })

@@ -69,5 +69,5 @@ function displayPendingTrips() {
 }
 
 function displayTotalSpending() {
-
+    grandTotal.innerText = `$${allTrips.calculateTotalSpending()}`
 }
