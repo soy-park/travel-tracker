@@ -13,6 +13,14 @@ body {
 
 .my-trips {
   font-size: 5em;
+  margin-bottom: 0em;
+}
+
+.userName {
+  font-size: 2em;
+  font-style: italic;
+  margin-top: 0em;
+  margin-bottom: 1em;
 }
 
 .main-section {
