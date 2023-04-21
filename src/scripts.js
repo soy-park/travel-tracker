@@ -24,14 +24,25 @@ const submitBtn = document.querySelector('.submit-button');
 const form = document.querySelector('.form');
 const inputFields = document.querySelectorAll('.input');
 const user = document.querySelector('.userName');
+const loginBtn = document.querySelector('.login-button');
+const loginPage = document.querySelector('.login-page');
+const dashboard = document.querySelector('.dashboard');
 
 let allTravelers, allTrips, allDestinations, randomId
 
-window.addEventListener('load', loadHomePage);
+window.addEventListener('load', loadLoginPage);
+loginBtn.addEventListener('click', loadDashboard)
 inputFields.forEach((input) => input.addEventListener('input', displayEstimatedCost));
 submitBtn.addEventListener('click', renderNewTrip);
 
-function loadHomePage() {
+function loadLoginPage() {
+
+}
+
+function loadDashboard() {
+    loginPage.classList.add('hidden');
+    dashboard.classList.remove('hidden');
+    
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
         allTravelers = new Travelers(data[0].travelers);
