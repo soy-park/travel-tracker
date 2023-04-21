@@ -7,7 +7,7 @@ class Destinations {
         return this.listOfDestinations.filter((destination) => destination.id === destinationId);
     }
 
-    findIDbyDestinationName(destinationName) {
+    findIDByDestinationName(destinationName) {
         const destinationObj = this.listOfDestinations.find((destination) => destination.destination === destinationName);
         return destinationObj.id;
     }

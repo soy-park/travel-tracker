@@ -47,19 +47,33 @@ function loadHomePage() {
 function renderNewTrip(event) {
     event.preventDefault();
     if (validateFormInput() === "incorrect input") {
-        alert("Please input all fields in the correct format")
+        alert("Please input all fields in the correct format");
         return;
     } else {
         const newTripObj = {
             id: allTrips.listOfTrips.length + 1,
             userID: randomId,
-            destinationID: allDestinations.getDestinationsByID(),
+            destinationID: allDestinations.findIDByDestinationName(destinationInput.value),
             travelers: travelersInput.value,
             date: dateInput.value,
             duration: durationInput.value,
             status: "pending",
             suggestedActivities: []
         }
+
+        Promise.all([postNewTrip(newTripObj)])
+            .then(() => {
+                fetchData('hydration')
+                .then(updatedHydra => {
+                    allHydration = new UserHydration(updatedHydra.hydrationData)
+                })
+                .then(() => {
+                    hydrationChart.destroy();
+                    sortByDate(allHydration.hydrationData);
+                    updateHydraDom(newHydraData.numOunces);
+                    renderHydration();
+                })
+            })  
     }
 }
 
