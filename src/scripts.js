@@ -26,7 +26,7 @@ const inputFields = document.querySelector("input:not([class])");
 let allTravelers, allTrips, allDestinations, randomId
 
 window.addEventListener('load', loadHomePage);
-inputFields.addEventListener('input', calculateEstimatedCost);
+inputFields.addEventListener('input', displayEstimatedCost);
 submitBtn.addEventListener('click', renderNewTrip);
 
 function loadHomePage() {
@@ -48,8 +48,15 @@ function loadHomePage() {
     .catch(err => alert(err))
 }
 
-function calculateEstimatedCost() {
-    
+function displayEstimatedCost() {
+    validateFormInput();
+    if (validateFormInput() === false) {
+        alert("Please check that all input fields are filled out in the correct format");
+    } else if (validateFormInput() === true && dateInput.value && durationInput.value && travelersInput.value) {
+        const cost = allDestinations.calculateEstimatedCost(allDestinations.findIDByDestinationName(destinationInput.value), durationInput.value, travelersInput.value);
+
+        estimate.innerText = `$${cost}`
+    }
 }
 
 function renderNewTrip(event) {
@@ -87,8 +94,18 @@ function renderNewTrip(event) {
 }
 
 function validateFormInput() {
-    if (!moment(dateInput.value).format("YYYY/MM/DD") || moment(dateInput.value).isBefore(allTrips.getTodaysDate()) || !dateInput.value || !durationInput.value || durationInput.value === NaN || !travelersInput.value || travelersInput.value === NaN) {
+    if (!moment(dateInput.value).format("YYYY/MM/DD") && durationInput.value && travelersInput.value) {
         return false;
+    } else if (moment(dateInput.value).isBefore(allTrips.getTodaysDate()) && durationInput.value && travelersInput.value) {
+        return false;
+    } else if (!dateInput.value && durationInput.value && travelersInput.value) {
+        return false;
+    } else if (!durationInput.value && dateInput.value && travelersInput.value) {
+        return false;
+    } else if (!travelersInput.value && dateInput.value && durationInput.value) {
+        return false;
+    } else {
+        return true;
     }
 }
 
