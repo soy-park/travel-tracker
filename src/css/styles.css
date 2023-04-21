@@ -10,6 +10,17 @@ body {
   align-items: center;
 }
 
+.login-page {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(189, 171, 147);
+}
+
+.login {
+  font-size: 70px;
+  text-align: center;
+  margin-top: 2em;
+}
 
 .dashboard {
   background-image: url(https://img.atlasobscura.com/8WQhQ0SjlrVkKHDTqElxCviWT4wt9VeuDr8LWrgex8A/rs:fill:12000:12000/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy8zMjlmMmE0Yzgw/NDZkZjFlZDlfRDNL/NTFKLmpwZw.jpg);
