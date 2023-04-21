@@ -21,10 +21,12 @@ const travelersInput = document.getElementById('travelers');
 const destinationInput = document.getElementById('destination');
 const submitBtn = document.querySelector('.submit-button');
 const form = document.querySelector('.form');
+const inputFields = document.querySelector("input:not([class])");
 
 let allTravelers, allTrips, allDestinations, randomId
 
 window.addEventListener('load', loadHomePage);
+inputFields.addEventListener('input', calculateEstimatedCost);
 submitBtn.addEventListener('click', renderNewTrip);
 
 function loadHomePage() {
@@ -44,6 +46,10 @@ function loadHomePage() {
         displayTotalSpending();
     })
     .catch(err => alert(err))
+}
+
+function calculateEstimatedCost() {
+    
 }
 
 function renderNewTrip(event) {
