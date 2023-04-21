@@ -14,8 +14,8 @@ class Destinations {
 
     calculateEstimatedCost(destinationId, duration, travelers) {
         const desiredDest = this.listOfDestinations.filter((destination => destination.id === destinationId));
-        const totalLodging = desiredDest.estimatedLodgingCostPerDay * duration;
-        const totalFlight = desiredDest.estimatedFlightCostPerPerson * travelers;
+        const totalLodging = desiredDest[0].estimatedLodgingCostPerDay * duration;
+        const totalFlight = desiredDest[0].estimatedFlightCostPerPerson * travelers;
         const total = totalLodging + totalFlight 
         const fee = total * .10;
         return total + fee;
