@@ -42,25 +42,21 @@ function loadLoginPage() {
     dashboard.classList.add('hidden');
 }
 
-function loadDashboard(event) {
-    event.preventDefault();
+function loadDashboard() {
     if (validateLoginInfo() === false) {
         alert("Invalid username and/or password");
         return;
     } else {
-        const stringOfNum = loginUsername.value.slice(8);
-        randomId = +stringOfNum;
-    
-        loginPage.classList.add('hidden');
-        dashboard.classList.remove('hidden');
-        
         Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations'), fetchDataById(randomId)])
         .then(data => {
             allTravelers = new Travelers(data[0].travelers);
             allTrips = new Trips(data[1].trips, data[2].destinations);
             allDestinations = new Destinations(data[2].destinations);
+            user = data[3];
         })
         .then(() => {
+            loginPage.classList.add('hidden');
+            dashboard.classList.remove('hidden');
             // randomId = generateRandomId();
             displayName(randomId);
             allTrips.getTripsByUserID(randomId);
@@ -74,7 +70,11 @@ function loadDashboard(event) {
 }
 
 function validateLoginInfo() {
-    if (loginUsername.value.slice(0, 8) === "traveler" && (Number.isInteger(loginUsername.value.slice(-1)) || Number.isInteger(loginUsername.value.slice(-2))) && loginPassword.value === "travel" && !Number.isInteger(loginUsername.value.slice(-3))) {
+    if (loginUsername.value.slice(0, 8) === "traveler" && Number.isInteger(+loginUsername.value.slice(8)) && Number.isInteger(+loginUsername.value.slice(-2)) && !Number.isInteger(loginUsername.value.slice(-3)) && loginPassword.value === "travel") {
+        randomId = loginUsername.value.slice(-2);
+        return true;
+    } else if (loginUsername.value.slice(0, 8) === "traveler" && Number.isInteger(+loginUsername.value.slice(8)) && !Number.isInteger(+loginUsername.value.slice(-2)) && !Number.isInteger(loginUsername.value.slice(-3)) && loginPassword.value === "travel") {
+        randomId = loginUsername.value.slice(-1);
         return true;
     } else {
         return false;
