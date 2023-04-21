@@ -63,17 +63,16 @@ function renderNewTrip(event) {
 
         Promise.all([postNewTrip(newTripObj)])
             .then(() => {
-                fetchData('hydration')
-                .then(updatedHydra => {
-                    allHydration = new UserHydration(updatedHydra.hydrationData)
+                fetchData('trips')
+                .then(updatedTrips => {
+                    allTrips = new Trips(randomId, updatedTrips.listOfTrips, allDestinations.listOfDestinations)
                 })
                 .then(() => {
-                    hydrationChart.destroy();
-                    sortByDate(allHydration.hydrationData);
-                    updateHydraDom(newHydraData.numOunces);
-                    renderHydration();
+                    displayPendingTrips();
                 })
             })  
+            
+        event.target.reset();
     }
 }
 
