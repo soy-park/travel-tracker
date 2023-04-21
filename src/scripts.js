@@ -42,36 +42,42 @@ function loadLoginPage() {
     dashboard.classList.add('hidden');
 }
 
-function loadDashboard() {
-    validateLoginInfo();
-
-    Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
-    .then(data => {
-        allTravelers = new Travelers(data[0].travelers);
-        allTrips = new Trips(data[1].trips, data[2].destinations);
-        allDestinations = new Destinations(data[2].destinations);
-    })
-    .then(() => {
-        randomId = generateRandomId();
-        displayName(randomId);
-        allTrips.getTripsByUserID(randomId);
-        displayPendingTrips();
-        displayPastTrips();
-        renderListOfDestinations();
-        displayTotalSpending();
-    })
-    .catch(err => alert(err))
+function loadDashboard(event) {
+    event.preventDefault();
+    if (validateLoginInfo() === false) {
+        alert("Invalid username and/or password");
+        return;
+    } else {
+        const stringOfNum = loginUsername.value.slice(8);
+        randomId = +stringOfNum;
+    
+        loginPage.classList.add('hidden');
+        dashboard.classList.remove('hidden');
+        
+        Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations'), fetchDataById(randomId)])
+        .then(data => {
+            allTravelers = new Travelers(data[0].travelers);
+            allTrips = new Trips(data[1].trips, data[2].destinations);
+            allDestinations = new Destinations(data[2].destinations);
+        })
+        .then(() => {
+            // randomId = generateRandomId();
+            displayName(randomId);
+            allTrips.getTripsByUserID(randomId);
+            displayPendingTrips();
+            displayPastTrips();
+            renderListOfDestinations();
+            displayTotalSpending();
+        })
+        .catch(err => alert(err))
+    }
 }
 
 function validateLoginInfo() {
     if (loginUsername.value.slice(0, 8) === "traveler" && (Number.isInteger(loginUsername.value.slice(-1)) || Number.isInteger(loginUsername.value.slice(-2))) && loginPassword.value === "travel" && !Number.isInteger(loginUsername.value.slice(-3))) {
-        const stringOfNum = loginUsername.value.slice(8);
-        randomId = +stringOfNum;
-
-        loginPage.classList.add('hidden');
-        dashboard.classList.remove('hidden');
+        return true;
     } else {
-        alert("Incorrect username and/or password");
+        return false;
     }
 }
 
