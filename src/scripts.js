@@ -46,9 +46,9 @@ function loadHomePage() {
 
 function renderNewTrip(event) {
     event.preventDefault();
-    if (validateFormInput() === "incorrect input") {
-        alert("Please input all fields in the correct format");
-        return;
+    validateFormInput();
+    if (validateFormInput() === false) {
+        alert("Please check that all input fields are filled out in the correct format!");
     } else {
         const newTripObj = {
             id: allTrips.listOfTrips.length + 1,
@@ -77,8 +77,8 @@ function renderNewTrip(event) {
 }
 
 function validateFormInput() {
-    if (!moment(dateInput) || moment(dateInput).isBefore(allTrips.getTodaysDate()) || !dateInput || durationInput === NaN || travelersInput === NaN) {
-        return "incorrect input"
+    if (dateInput.value !== moment().format("YYYY/MM/DD") || moment(dateInput.value).isBefore(allTrips.getTodaysDate()) || !dateInput.value || !durationInput.value || durationInput.value === NaN || !travelersInput.value || travelersInput.value === NaN) {
+        return false;
     }
 }
 
