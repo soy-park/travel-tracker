@@ -7,6 +7,11 @@ class Destinations {
         return this.listOfDestinations.filter((destination) => destination.id === destinationId);
     }
 
+    findIDbyDestinationName(destinationName) {
+        const destinationObj = this.listOfDestinations.find((destination) => destination.destination === destinationName);
+        return destinationObj.id;
+    }
+
     calculateEstimatedCost(destinationId, duration, travelers) {
         const desiredDest = this.listOfDestinations.filter((destination => destination.id === destinationId));
         const totalLodging = desiredDest.estimatedLodgingCostPerDay * duration;

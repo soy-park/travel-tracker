@@ -47,15 +47,16 @@ function loadHomePage() {
 function renderNewTrip(event) {
     event.preventDefault();
     if (validateFormInput() === "incorrect input") {
+        alert("Please input all fields in the correct format")
         return;
     } else {
         const newTripObj = {
-            id: 1,
-            userID: 44,
-            destinationID: 49,
-            travelers: 1,
-            date: "2022/09/16",
-            duration: 8,
+            id: allTrips.listOfTrips.length + 1,
+            userID: randomId,
+            destinationID: allDestinations.getDestinationsByID(),
+            travelers: travelersInput.value,
+            date: dateInput.value,
+            duration: durationInput.value,
             status: "pending",
             suggestedActivities: []
         }
@@ -63,7 +64,7 @@ function renderNewTrip(event) {
 }
 
 function validateFormInput() {
-    if (!moment(dateInput) || moment(dateInput).isBefore(allTrips.getTodaysDate()) || durationInput === NaN || travelersInput === NaN) {
+    if (!moment(dateInput) || moment(dateInput).isBefore(allTrips.getTodaysDate()) || !dateInput || durationInput === NaN || travelersInput === NaN) {
         return "incorrect input"
     }
 }
