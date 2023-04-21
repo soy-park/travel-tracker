@@ -31,7 +31,6 @@ submitBtn.addEventListener('click', renderNewTrip);
 inputFields.forEach((input) => input.addEventListener('input', displayEstimatedCost));
 
 function loadHomePage() {
-    console.log(inputFields)
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
         allTravelers = new Travelers(data[0].travelers);
@@ -95,18 +94,10 @@ function renderNewTrip(event) {
     }
 }
 
-function validateFormInput() {
-    if (!moment(dateInput.value).format("YYYY/MM/DD")) {
+function validateFormInput(date, duration, travelers, destination) {
+    if (!moment(date).format("YYYY/MM/DD") || moment(date).isBefore(allTrips.getTodaysDate()) || isNaN(duration) || isNaN(travelers) || !destination) {
         return false;
-    } else if (moment(dateInput.value).isBefore(allTrips.getTodaysDate())) {
-        return false;
-    } else if (!dateInput.value && durationInput.value && travelersInput.value) {
-        return false;
-    } else if (!durationInput.value && dateInput.value && travelersInput.value) {
-        return false;
-    } else if (!travelersInput.value && dateInput.value && durationInput.value) {
-        return false;
-    } else if (moment(dateInput.value).format("YYYY/MM/DD") && moment(dateInput.value).isAfter(allTrips.getTodaysDate()) && durationInput.value && travelersInput.value && destinationInput.value) {
+    } else {
         return true;
     }
 }
