@@ -11,6 +11,10 @@ body {
   align-items: center;
 }
 
+.my-trips {
+  font-size: 5em;
+}
+
 .main-section {
   display: flex;
   flex-direction: row;
@@ -74,10 +78,6 @@ form {
   flex-direction: row;
 }
 
-.my-trips {
-  font-size: 5em;
-}
-
 .pending {
   margin-right: 10em;
   font-size: 22px;
@@ -117,8 +117,19 @@ form {
 }
 
 label, 
-form p {
+form p, 
+.estimated-cost,
+.estimate {
   font-size: 20px;
+}
+
+.estimated-cost {
+  margin-top: 3em;
+  margin-bottom: 0em;
+}
+
+.estimate {
+  color: rgb(4, 175, 4);
 }
 
 input {
