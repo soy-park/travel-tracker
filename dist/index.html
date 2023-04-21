@@ -7,46 +7,56 @@
   <title>Travel Tracker</title>
 </head>
 <body>
-  <h1 class="my-trips">MY TRIPS</h1>
-  <p class="userName"></p>
-  <section class="main-section">
-    <section class="left-section">
-      <article class="first-article">
-        <h2 class="upcoming-trips">UPCOMING TRIPS</h2>
-        <div class="pending-and-approved">
-          <section class="pending-trips">
-          </section>
-          <section class="approved-trips">
-          </section>
-        </div>
-      </article>
-      <article class="second-article">
-        <h2 class="past-trips">PAST TRIPS</h2>
-        <section class="past-trips-list"></section>
-      </article>
+  <main class="login-page hidden">
+    <h1>LOGIN</h1>
+    <form class="login-form">
+      <input type="text" name="username" id="login-username" class="login-form-input" placeholder="Username">
+      <input type="password" name="password" id="login-password" class="login-form-input" placeholder="Password">
+      <button class="login-button">Login</button>
+    </form>
+  </main>
+  <main class="dashboard">
+    <h1 class="my-trips">MY TRIPS</h1>
+    <p class="userName"></p>
+    <section class="main-section">
+      <section class="left-section">
+        <article class="first-article">
+          <h2 class="upcoming-trips">UPCOMING TRIPS</h2>
+          <div class="pending-and-approved">
+            <section class="pending-trips">
+            </section>
+            <section class="approved-trips">
+            </section>
+          </div>
+        </article>
+        <article class="second-article">
+          <h2 class="past-trips">PAST TRIPS</h2>
+          <section class="past-trips-list"></section>
+        </article>
+      </section>
+      <aside>
+        <form class="form">
+          <h2 class="trip-request">TRIP REQUEST</h2>
+          <label for="date" class="choose-date"><strong>Date: </strong></label><span><input type="text" class="input" id="date" name="date" placeholder="YYYY/MM/DD" required></span><br>
+          <label for="duration" class="choose-duration"><strong>Duration: </strong></label><span><input type="text" class="input" id="duration" name="duration" placeholder="0-365" required></span><br>
+          <label for="travelers" class="choose-travelers"><strong>Travelers: </strong></label><span><input type="text" class="input" id="travelers" name="travelers" placeholder="0-500" required></span><br>
+          <label for="destination" class="choose-destination"><strong>Destination: </strong></label><span><select class="input" id="destination" name="destination"></select></span><br>
+          <p class="estimated-cost"><strong>Estimated Cost: <span class="estimate"></span></strong></p>
+          <button class="submit-button">Submit</button>
+        </form>
+        <article class="third-article">
+          <div class="total-spending">
+            <h2 class="total-amount-spent">Total Amount I Have Spent on Trips:</h2>
+            <p class="grand-total"></p>
+          </div>
+          <div class="total-spending-this-year">
+            <h2 class="total-amount-this-year">Total Amount I Have Spent on Trips This Year:</h2>
+            <p class="this-year-total"></p>
+          </div>
+        </article>
+      </aside>
     </section>
-    <aside>
-      <form class="form">
-        <h2 class="trip-request">TRIP REQUEST</h2>
-        <label for="date" class="choose-date"><strong>Date: </strong></label><span><input type="text" class="input" id="date" name="date" placeholder="YYYY/MM/DD" required></span><br>
-        <label for="duration" class="choose-duration"><strong>Duration: </strong></label><span><input type="text" class="input" id="duration" name="duration" placeholder="0-365" required></span><br>
-        <label for="travelers" class="choose-travelers"><strong>Travelers: </strong></label><span><input type="text" class="input" id="travelers" name="travelers" placeholder="0-500" required></span><br>
-        <label for="destination" class="choose-destination"><strong>Destination: </strong></label><span><select class="input" id="destination" name="destination"></select></span><br>
-        <p class="estimated-cost"><strong>Estimated Cost: <span class="estimate"></span></strong></p>
-        <button class="submit-button">Submit</button>
-      </form>
-      <article class="third-article">
-        <div class="total-spending">
-          <h2 class="total-amount-spent">Total Amount I Have Spent on Trips:</h2>
-          <p class="grand-total"></p>
-        </div>
-        <div class="total-spending-this-year">
-          <h2 class="total-amount-this-year">Total Amount I Have Spent on Trips This Year:</h2>
-          <p class="this-year-total"></p>
-        </div>
-      </article>
-    </aside>
-  </section>
+  </main>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 </body>

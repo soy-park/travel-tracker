@@ -13,12 +13,14 @@ body {
 
 .my-trips {
   font-size: 5em;
+  text-align: center;
   margin-bottom: 0em;
 }
 
 .userName {
   font-size: 2em;
   font-style: italic;
+  text-align: center;
   margin-top: 0em;
   margin-bottom: 1em;
 }
@@ -163,4 +165,8 @@ input {
   font-weight: bold;
   color: rgb(3, 122, 3);
   text-align: center;
+}
+
+.hidden {
+  display: none;
 }
