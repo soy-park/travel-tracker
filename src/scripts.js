@@ -30,6 +30,7 @@ window.addEventListener('load', loadHomePage);
 submitBtn.addEventListener('click', renderNewTrip);
 inputFields.forEach((input) => input.addEventListener('input', displayEstimatedCost));
 
+
 function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
@@ -49,22 +50,13 @@ function loadHomePage() {
 }
 
 function displayEstimatedCost() {
-    if (validateFormInput(dateInput.value, durationInput.value, travelersInput.value, destinationInput.value) === false) {
-        alert("Please check that all input fields are filled out in the correct format");
-    } else {
-        // console.log(+durationInput.value)
-        // console.log(+travelersInput.value)
-        // console.log(allDestinations.findIDByDestinationName(destinationInput.value))
-        let cost = allDestinations.calculateEstimatedCost(allDestinations.findIDByDestinationName(destinationInput.value), +durationInput.value, +travelersInput.value);
-        // console.log(cost)
-        estimate.innerText = `$${cost}`
-    }
+    let cost = allDestinations.calculateEstimatedCost(allDestinations.findIDByDestinationName(destinationInput.value), +durationInput.value, +travelersInput.value);
+    estimate.innerText = `$${cost}`
 }
 
 function renderNewTrip(event) {
     event.preventDefault();
-    validateFormInput();
-    if (validateFormInput() === false) {
+    if (validateFormInput(dateInput.value, +durationInput.value, +travelersInput.value, destinationInput.value) === false) {
         alert("Please check that all input fields are filled out in the correct format");
     } else {
         const newTripObj = {
@@ -101,6 +93,8 @@ function validateFormInput(date, duration, travelers, destination) {
         } else {
             return true;
         }
+    } else {
+        return false;
     }
 }
 
