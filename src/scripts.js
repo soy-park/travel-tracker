@@ -26,6 +26,8 @@ const inputFields = document.querySelectorAll('.input');
 const user = document.querySelector('.userName');
 const loginBtn = document.querySelector('.login-button');
 const loginPage = document.querySelector('.login-page');
+const loginUsername = document.getElementById('login-username');
+const loginPassword = document.getElementById('login-password');
 const dashboard = document.querySelector('.dashboard');
 
 let allTravelers, allTrips, allDestinations, randomId
@@ -41,6 +43,7 @@ function loadLoginPage() {
 }
 
 function loadDashboard() {
+    validateLoginInfo();
     loginPage.classList.add('hidden');
     dashboard.classList.remove('hidden');
 
@@ -60,6 +63,10 @@ function loadDashboard() {
         displayTotalSpending();
     })
     .catch(err => alert(err))
+}
+
+function validateLoginInfo() {
+
 }
 
 function displayEstimatedCost() {
