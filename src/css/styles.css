@@ -14,12 +14,26 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: rgb(189, 171, 147);
+  border: 20px double black;
 }
 
 .login {
   font-size: 70px;
   text-align: center;
   margin-top: 2em;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(189, 171, 147);
+  align-items: center;
+}
+
+.login-form-input {
+  height: 1em;
+  font-size: 22px;
+  margin-bottom: 0.5em;
 }
 
 .dashboard {
