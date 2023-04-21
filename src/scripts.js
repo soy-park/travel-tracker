@@ -23,6 +23,7 @@ const destinationInput = document.getElementById('destination');
 const submitBtn = document.querySelector('.submit-button');
 const form = document.querySelector('.form');
 const inputFields = document.querySelectorAll('.input');
+const user = document.querySelector('.userName');
 
 let allTravelers, allTrips, allDestinations, randomId
 
@@ -39,6 +40,7 @@ function loadHomePage() {
     })
     .then(() => {
         randomId = generateRandomId();
+        displayName(randomId);
         allTrips.getTripsByUserID(randomId);
         displayPendingTrips();
         displayPastTrips();
@@ -95,6 +97,11 @@ function validateFormInput(date, duration, travelers, destination) {
     } else {
         return false;
     }
+}
+
+function displayName(travelerId) {
+    let name = allTravelers.getTravelerNameByID(travelerId);
+    user.innerText = `${name}`;
 }
 
 function displayPastTrips() {
