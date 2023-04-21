@@ -2,7 +2,7 @@
 // Do not delete or rename this file ********
 
 import './css/styles.css';
-import { fetchData } from './apiCalls'
+import { fetchData, postNewTrip } from './apiCalls'
 import Trips from './trips';
 import Destinations from './destinations';
 import Travelers from './travelers';
@@ -20,6 +20,7 @@ const durationInput = document.getElementById('duration');
 const travelersInput = document.getElementById('travelers');
 const destinationInput = document.getElementById('destination');
 const submitBtn = document.querySelector('.submit-button');
+const form = document.querySelector('.form');
 
 let allTravelers, allTrips, allDestinations, randomId
 
@@ -30,11 +31,12 @@ function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
         allTravelers = new Travelers(data[0].travelers);
-        randomId = generateRandomId();
-        allTrips = new Trips(randomId, data[1].trips, data[2].destinations);
+        allTrips = new Trips(data[1].trips, data[2].destinations);
         allDestinations = new Destinations(data[2].destinations);
     })
     .then(() => {
+        randomId = generateRandomId();
+        allTrips.getTripsByUserID(randomId);
         displayPendingTrips();
         displayPastTrips();
         renderListOfDestinations();
@@ -65,19 +67,20 @@ function renderNewTrip(event) {
             .then(() => {
                 fetchData('trips')
                 .then(updatedTrips => {
-                    allTrips = new Trips(randomId, updatedTrips.listOfTrips, allDestinations.listOfDestinations)
+                    allTrips = new Trips(updatedTrips.trips, allDestinations.listOfDestinations)
+                    console.log(allTrips.listOfTrips)
                 })
                 .then(() => {
                     displayPendingTrips();
                 })
             })  
             
-        event.target.reset();
+        form.reset();
     }
 }
 
 function validateFormInput() {
-    if (dateInput.value !== moment().format("YYYY/MM/DD") || moment(dateInput.value).isBefore(allTrips.getTodaysDate()) || !dateInput.value || !durationInput.value || durationInput.value === NaN || !travelersInput.value || travelersInput.value === NaN) {
+    if (!moment(dateInput.value).format("YYYY/MM/DD") || moment(dateInput.value).isBefore(allTrips.getTodaysDate()) || !dateInput.value || !durationInput.value || durationInput.value === NaN || !travelersInput.value || travelersInput.value === NaN) {
         return false;
     }
 }

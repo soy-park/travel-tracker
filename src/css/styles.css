@@ -66,7 +66,6 @@ aside {
 }
 
 form {
-  border: 7px solid rgb(243, 224, 99);
   padding: 0.5em 1em 2em 2em;
 }
 
@@ -99,8 +98,8 @@ form {
 .third-article div {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
-  padding: 0.5em 0em 1em 1.5em;
-  margin-bottom: 2em;
+  padding: 1em 1.5em 1em 1.5em;
+  margin-bottom: 1em;
 }
 
 .past-destination {

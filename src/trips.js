@@ -2,14 +2,17 @@ import Destinations from "../src/destinations";
 import moment from "moment";
 
 class Trips {
-    constructor(userID, arrayOfTrips, arrayOfDestinations) {
+    constructor(arrayOfTrips, arrayOfDestinations) {
         this.listOfTrips = arrayOfTrips,
-        this.tripsByID = this.getTripsByUserID(userID),
+        this.tripsByID = [];
         this.destinations = new Destinations(arrayOfDestinations)
     }
 
     getTripsByUserID(id) {
-        return this.listOfTrips.filter((trip) => trip.userID === id);
+        const filteredTrips = this.listOfTrips.filter((trip) => trip.userID === id);
+        return filteredTrips.map((trip) => {
+            this.tripsByID.push(trip)
+        })
     }
 
     getTodaysDate() {
