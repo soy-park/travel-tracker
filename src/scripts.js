@@ -28,7 +28,8 @@ let allTravelers, allTrips, allDestinations, randomId
 
 window.addEventListener('load', loadHomePage);
 submitBtn.addEventListener('click', renderNewTrip);
-inputFields.forEach((input) => input.addEventListener('input', displayEstimatedCost));
+// inputFields.forEach((input) => input.addEventListener('input', displayEstimatedCost));
+form.addEventListener('input', displayEstimatedCost);
 
 function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
@@ -49,13 +50,11 @@ function loadHomePage() {
 }
 
 function displayEstimatedCost() {
-    validateFormInput();
-    console.log(validateFormInput())
+    validateFormInput(dateInput.value, durationInput.value, travelersInput.value, destinationInput.value);
     if (validateFormInput() === false) {
         alert("Please check that all input fields are filled out in the correct format");
     } else {
         let cost = allDestinations.calculateEstimatedCost(allDestinations.findIDByDestinationName(destinationInput.value), durationInput.value, travelersInput.value);
-        console.log("hello")
         console.log(cost)
         estimate.innerText = `$${cost}`
     }
