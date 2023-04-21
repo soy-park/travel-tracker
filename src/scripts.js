@@ -2,7 +2,7 @@
 // Do not delete or rename this file ********
 
 import './css/styles.css';
-import { fetchData, postNewTrip } from './apiCalls'
+import { fetchData, fetchDataById, postNewTrip } from './apiCalls'
 import Trips from './trips';
 import Destinations from './destinations';
 import Travelers from './travelers';
