@@ -27,9 +27,8 @@ const inputFields = document.querySelectorAll('.input');
 let allTravelers, allTrips, allDestinations, randomId
 
 window.addEventListener('load', loadHomePage);
-submitBtn.addEventListener('click', renderNewTrip);
 inputFields.forEach((input) => input.addEventListener('input', displayEstimatedCost));
-
+submitBtn.addEventListener('click', renderNewTrip);
 
 function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
@@ -98,10 +97,6 @@ function validateFormInput(date, duration, travelers, destination) {
     }
 }
 
-function generateRandomId() {
-    return Math.floor(Math.random() * allTravelers.listOfTravelers.length);
-}
-
 function displayPastTrips() {
     allTrips.getPastTrips().map((trip) => {
         const destinationById = allDestinations.getDestinationsByID(trip.destinationID);
@@ -145,4 +140,8 @@ function renderListOfDestinations() {
 function displayTotalSpending() {
     grandTotal.innerText = `$${allTrips.calculateTotalSpending()}`
     totalThisYear.innerText = `$${allTrips.calculateSpendingThisYear()}`
+}
+
+function generateRandomId() {
+    return Math.floor(Math.random() * allTravelers.listOfTravelers.length);
 }
