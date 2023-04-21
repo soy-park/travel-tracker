@@ -71,6 +71,7 @@ function renderNewTrip(event) {
                     console.log(allTrips.listOfTrips)
                 })
                 .then(() => {
+                    allTrips.getTripsByUserID(randomId);
                     displayPendingTrips();
                 })
             })  
@@ -106,17 +107,19 @@ function displayPastTrips() {
 }
 
 function displayPendingTrips() {
+    pendingTrips.innerHTML = ` `;
     allTrips.getPendingTrips().map((trip) => {
         const destinationById = allDestinations.getDestinationsByID(trip.destinationID);
         destinationById.map((destination) => {
-            pendingTrips.innerHTML += `<article class=pending-trip-box>
-                <p class="pending-destination"><strong>${destination.destination}</strong></p>
-                <ul>
-                    <li>Travelers: ${trip.travelers}</li>
-                    <li>Date: ${trip.date}</li>
-                    <li>Duration: ${trip.duration} days</li>
-                </ul>
-            </article>`
+            pendingTrips.innerHTML += `<h3 class='pending'>Pending</h3>
+                <article class=pending-trip-box>
+                    <p class="pending-destination"><strong>${destination.destination}</strong></p>
+                    <ul>
+                        <li>Travelers: ${trip.travelers}</li>
+                        <li>Date: ${trip.date}</li>
+                        <li>Duration: ${trip.duration} days</li>
+                    </ul>
+                </article>`
         })
     })
 }
