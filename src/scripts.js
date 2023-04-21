@@ -44,8 +44,6 @@ function loadLoginPage() {
 
 function loadDashboard() {
     validateLoginInfo();
-    loginPage.classList.add('hidden');
-    dashboard.classList.remove('hidden');
 
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
@@ -66,7 +64,15 @@ function loadDashboard() {
 }
 
 function validateLoginInfo() {
+    if (loginUsername.value.slice(0, 8) === "traveler" && (Number.isInteger(loginUsername.value.slice(-1)) || Number.isInteger(loginUsername.value.slice(-2))) && loginPassword.value === "travel" && !Number.isInteger(loginUsername.value.slice(-3))) {
+        const stringOfNum = loginUsername.value.slice(8);
+        randomId = +stringOfNum;
 
+        loginPage.classList.add('hidden');
+        dashboard.classList.remove('hidden');
+    } else {
+        alert("Incorrect username and/or password");
+    }
 }
 
 function displayEstimatedCost() {
