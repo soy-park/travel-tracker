@@ -129,7 +129,7 @@ form p,
 }
 
 .estimate {
-  color: rgb(4, 175, 4);
+  color: rgb(3, 122, 3);
 }
 
 input {
@@ -153,6 +153,6 @@ input {
 .this-year-total {
   font-size: 30px;
   font-weight: bold;
-  color: rgb(4, 175, 4);
+  color: rgb(3, 122, 3);
   text-align: center;
 }
