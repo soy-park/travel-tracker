@@ -8,6 +8,7 @@ import Destinations from './destinations';
 import Travelers from './travelers';
 import './images/turing-logo.png'
 import moment from "moment";
+// import { validate } from 'webpack';
 
 const pastTrips = document.querySelector('.past-trips-list');
 const pendingTrips = document.querySelector('.pending-trips');
@@ -21,15 +22,16 @@ const travelersInput = document.getElementById('travelers');
 const destinationInput = document.getElementById('destination');
 const submitBtn = document.querySelector('.submit-button');
 const form = document.querySelector('.form');
-const inputFields = document.querySelector("input:not([class])");
+const inputFields = document.querySelectorAll('.input');
 
 let allTravelers, allTrips, allDestinations, randomId
 
 window.addEventListener('load', loadHomePage);
-inputFields.addEventListener('input', displayEstimatedCost);
 submitBtn.addEventListener('click', renderNewTrip);
+inputFields.forEach((input) => input.addEventListener('input', displayEstimatedCost));
 
 function loadHomePage() {
+    console.log(inputFields)
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
         allTravelers = new Travelers(data[0].travelers);
@@ -42,7 +44,6 @@ function loadHomePage() {
         displayPendingTrips();
         displayPastTrips();
         renderListOfDestinations();
-        // displayEstimate();
         displayTotalSpending();
     })
     .catch(err => alert(err))
@@ -50,11 +51,13 @@ function loadHomePage() {
 
 function displayEstimatedCost() {
     validateFormInput();
+    console.log(validateFormInput())
     if (validateFormInput() === false) {
         alert("Please check that all input fields are filled out in the correct format");
-    } else if (validateFormInput() === true && dateInput.value && durationInput.value && travelersInput.value) {
-        const cost = allDestinations.calculateEstimatedCost(allDestinations.findIDByDestinationName(destinationInput.value), durationInput.value, travelersInput.value);
-
+    } else {
+        let cost = allDestinations.calculateEstimatedCost(allDestinations.findIDByDestinationName(destinationInput.value), durationInput.value, travelersInput.value);
+        console.log("hello")
+        console.log(cost)
         estimate.innerText = `$${cost}`
     }
 }
@@ -81,7 +84,6 @@ function renderNewTrip(event) {
                 fetchData('trips')
                 .then(updatedTrips => {
                     allTrips = new Trips(updatedTrips.trips, allDestinations.listOfDestinations)
-                    console.log(allTrips.listOfTrips)
                 })
                 .then(() => {
                     allTrips.getTripsByUserID(randomId);
@@ -94,9 +96,9 @@ function renderNewTrip(event) {
 }
 
 function validateFormInput() {
-    if (!moment(dateInput.value).format("YYYY/MM/DD") && durationInput.value && travelersInput.value) {
+    if (!moment(dateInput.value).format("YYYY/MM/DD")) {
         return false;
-    } else if (moment(dateInput.value).isBefore(allTrips.getTodaysDate()) && durationInput.value && travelersInput.value) {
+    } else if (moment(dateInput.value).isBefore(allTrips.getTodaysDate())) {
         return false;
     } else if (!dateInput.value && durationInput.value && travelersInput.value) {
         return false;
@@ -104,7 +106,7 @@ function validateFormInput() {
         return false;
     } else if (!travelersInput.value && dateInput.value && durationInput.value) {
         return false;
-    } else {
+    } else if (moment(dateInput.value).format("YYYY/MM/DD") && moment(dateInput.value).isAfter(allTrips.getTodaysDate()) && durationInput.value && travelersInput.value && destinationInput.value) {
         return true;
     }
 }
