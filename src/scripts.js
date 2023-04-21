@@ -28,8 +28,7 @@ let allTravelers, allTrips, allDestinations, randomId
 
 window.addEventListener('load', loadHomePage);
 submitBtn.addEventListener('click', renderNewTrip);
-// inputFields.forEach((input) => input.addEventListener('input', displayEstimatedCost));
-form.addEventListener('input', displayEstimatedCost);
+inputFields.forEach((input) => input.addEventListener('input', displayEstimatedCost));
 
 function loadHomePage() {
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
@@ -50,12 +49,14 @@ function loadHomePage() {
 }
 
 function displayEstimatedCost() {
-    validateFormInput(dateInput.value, durationInput.value, travelersInput.value, destinationInput.value);
-    if (validateFormInput() === false) {
+    if (validateFormInput(dateInput.value, durationInput.value, travelersInput.value, destinationInput.value) === false) {
         alert("Please check that all input fields are filled out in the correct format");
     } else {
-        let cost = allDestinations.calculateEstimatedCost(allDestinations.findIDByDestinationName(destinationInput.value), durationInput.value, travelersInput.value);
-        console.log(cost)
+        // console.log(+durationInput.value)
+        // console.log(+travelersInput.value)
+        // console.log(allDestinations.findIDByDestinationName(destinationInput.value))
+        let cost = allDestinations.calculateEstimatedCost(allDestinations.findIDByDestinationName(destinationInput.value), +durationInput.value, +travelersInput.value);
+        // console.log(cost)
         estimate.innerText = `$${cost}`
     }
 }
@@ -94,10 +95,12 @@ function renderNewTrip(event) {
 }
 
 function validateFormInput(date, duration, travelers, destination) {
-    if (!moment(date).format("YYYY/MM/DD") || moment(date).isBefore(allTrips.getTodaysDate()) || isNaN(duration) || isNaN(travelers) || !destination) {
-        return false;
-    } else {
-        return true;
+    if (date && duration && travelers && destination) {
+        if (!moment(date).format("YYYY/MM/DD") || moment(date).isBefore(allTrips.getTodaysDate()) || isNaN(duration) || isNaN(travelers) || !destination) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
 
