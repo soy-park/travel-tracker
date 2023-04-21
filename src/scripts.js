@@ -36,13 +36,14 @@ inputFields.forEach((input) => input.addEventListener('input', displayEstimatedC
 submitBtn.addEventListener('click', renderNewTrip);
 
 function loadLoginPage() {
-
+    loginPage.classList.remove('hidden');
+    dashboard.classList.add('hidden');
 }
 
 function loadDashboard() {
     loginPage.classList.add('hidden');
     dashboard.classList.remove('hidden');
-    
+
     Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
     .then(data => {
         allTravelers = new Travelers(data[0].travelers);
