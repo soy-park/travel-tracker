@@ -7,6 +7,7 @@ import Trips from './trips';
 import Destinations from './destinations';
 import Travelers from './travelers';
 import './images/turing-logo.png'
+import moment from "moment";
 
 const pastTrips = document.querySelector('.past-trips-list');
 const pendingTrips = document.querySelector('.pending-trips');
@@ -45,11 +46,26 @@ function loadHomePage() {
 
 function renderNewTrip(event) {
     event.preventDefault();
-    validateFormInput();
+    if (validateFormInput() === "incorrect input") {
+        return;
+    } else {
+        const newTripObj = {
+            id: 1,
+            userID: 44,
+            destinationID: 49,
+            travelers: 1,
+            date: "2022/09/16",
+            duration: 8,
+            status: "pending",
+            suggestedActivities: []
+        }
+    }
 }
 
 function validateFormInput() {
-    
+    if (!moment(dateInput) || moment(dateInput).isBefore(allTrips.getTodaysDate()) || durationInput === NaN || travelersInput === NaN) {
+        return "incorrect input"
+    }
 }
 
 function generateRandomId() {
