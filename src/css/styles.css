@@ -36,6 +36,17 @@ body {
   margin-bottom: 0.5em;
 }
 
+.login-button {
+  height: 1.5em;
+  font-size: 22px;
+  padding-left: 4em;
+  padding-right: 4em;
+}
+
+.login-button:hover {
+  cursor: pointer;
+}
+
 .dashboard {
   background-image: url(https://img.atlasobscura.com/8WQhQ0SjlrVkKHDTqElxCviWT4wt9VeuDr8LWrgex8A/rs:fill:12000:12000/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy8zMjlmMmE0Yzgw/NDZkZjFlZDlfRDNL/NTFKLmpwZw.jpg);
 }
