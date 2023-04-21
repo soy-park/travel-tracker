@@ -50,7 +50,7 @@ function renderNewTrip(event) {
     event.preventDefault();
     validateFormInput();
     if (validateFormInput() === false) {
-        alert("Please check that all input fields are filled out in the correct format!");
+        alert("Please check that all input fields are filled out in the correct format");
     } else {
         const newTripObj = {
             id: allTrips.listOfTrips.length + 1,
