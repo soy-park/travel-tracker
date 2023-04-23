@@ -2,7 +2,7 @@
 // Do not delete or rename this file ********
 
 import './css/styles.css';
-import { fetchData, postNewTrip } from './apiCalls'
+import { fetchData, fetchDataById, postNewTrip } from './apiCalls'
 import Trips from './trips';
 import Destinations from './destinations';
 import Travelers from './travelers';
@@ -24,30 +24,58 @@ const submitBtn = document.querySelector('.submit-button');
 const form = document.querySelector('.form');
 const inputFields = document.querySelectorAll('.input');
 const user = document.querySelector('.userName');
+const loginBtn = document.querySelector('.login-button');
+const loginPage = document.querySelector('.login-page');
+const loginUsername = document.getElementById('login-username');
+const loginPassword = document.getElementById('login-password');
+const dashboard = document.querySelector('.dashboard');
 
-let allTravelers, allTrips, allDestinations, randomId
+let allTravelers, allTrips, allDestinations, desiredTraveler, randomId
 
-window.addEventListener('load', loadHomePage);
+window.addEventListener('load', loadLoginPage);
+loginBtn.addEventListener('click', validateLoginInfo);
 inputFields.forEach((input) => input.addEventListener('input', displayEstimatedCost));
 submitBtn.addEventListener('click', renderNewTrip);
 
-function loadHomePage() {
-    Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations')])
+function loadLoginPage() {
+    loginPage.classList.remove('hidden');
+    dashboard.classList.add('hidden');
+}
+
+function loadDashboard() {
+    Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations'), fetchDataById(randomId)])
     .then(data => {
         allTravelers = new Travelers(data[0].travelers);
         allTrips = new Trips(data[1].trips, data[2].destinations);
-        allDestinations = new Destinations(data[2].destinations);
+        allDestinations = new Destinations(data[2].destinations);            
+        desiredTraveler = data[3];
     })
-    .then(() => {
-        randomId = generateRandomId();
+    .then(() => {               
         displayName(randomId);
         allTrips.getTripsByUserID(randomId);
         displayPendingTrips();
-        displayPastTrips();
+        displayPastTrips();            
         renderListOfDestinations();
         displayTotalSpending();
     })
     .catch(err => alert(err))
+}
+
+function validateLoginInfo(event) {
+    event.preventDefault();
+    if (loginUsername.value.slice(0, 8) === "traveler" && Number.isInteger(+loginUsername.value.slice(8)) && Number.isInteger(+loginUsername.value.slice(-1)) && Number.isInteger(+loginUsername.value.slice(-2)) && !Number.isInteger(loginUsername.value.slice(-3)) && loginPassword.value === "travel") {
+        randomId = +loginUsername.value.slice(-2);
+        loginPage.classList.add('hidden');
+        dashboard.classList.remove('hidden'); 
+        loadDashboard();
+    } else if (loginUsername.value.slice(0, 8) === "traveler" && Number.isInteger(+loginUsername.value.slice(8)) && Number.isInteger(+loginUsername.value.slice(-1)) && !Number.isInteger(+loginUsername.value.slice(-2)) && !Number.isInteger(loginUsername.value.slice(-3)) && loginPassword.value === "travel") {
+        randomId = +loginUsername.value.slice(-1);
+        loginPage.classList.add('hidden');
+        dashboard.classList.remove('hidden'); 
+        loadDashboard();
+    } else {
+        alert("Incorrect username and/or password");
+    }
 }
 
 function displayEstimatedCost() {

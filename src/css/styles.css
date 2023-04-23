@@ -3,7 +3,6 @@
 }
 
 body {
-  background-image: url(https://img.atlasobscura.com/8WQhQ0SjlrVkKHDTqElxCviWT4wt9VeuDr8LWrgex8A/rs:fill:12000:12000/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy8zMjlmMmE0Yzgw/NDZkZjFlZDlfRDNL/NTFKLmpwZw.jpg);
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -11,14 +10,57 @@ body {
   align-items: center;
 }
 
+.login-page {
+  width: 53vw;
+  height: 98vh;
+  background-color: rgb(189, 171, 147);
+  border: 20px double black;
+}
+
+.login {
+  font-size: 70px;
+  text-align: center;
+  margin-top: 2em;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(189, 171, 147);
+  align-items: center;
+}
+
+.login-form-input {
+  height: 1em;
+  font-size: 22px;
+  margin-bottom: 0.5em;
+}
+
+.login-button {
+  height: 1.5em;
+  font-size: 22px;
+  padding-left: 4em;
+  padding-right: 4em;
+}
+
+.login-button:hover {
+  cursor: pointer;
+}
+
+.dashboard {
+  background-image: url(https://img.atlasobscura.com/8WQhQ0SjlrVkKHDTqElxCviWT4wt9VeuDr8LWrgex8A/rs:fill:12000:12000/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL2Fzc2V0/cy8zMjlmMmE0Yzgw/NDZkZjFlZDlfRDNL/NTFKLmpwZw.jpg);
+}
+
 .my-trips {
   font-size: 5em;
+  text-align: center;
   margin-bottom: 0em;
 }
 
 .userName {
   font-size: 2em;
   font-style: italic;
+  text-align: center;
   margin-top: 0em;
   margin-bottom: 1em;
 }
@@ -163,4 +205,8 @@ input {
   font-weight: bold;
   color: rgb(3, 122, 3);
   text-align: center;
+}
+
+.hidden {
+  display: none;
 }

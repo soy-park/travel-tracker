@@ -6,6 +6,15 @@ function fetchData(type) {
     })
 }
 
+function fetchDataById(travelerId) {
+    return fetch(`http://localhost:3001/api/v1/travelers/${travelerId}`)
+    .then(res => res.json())
+    .catch(err => {
+        throw new Error(err)
+    })
+}
+
+
 function postNewTrip(inputObject) {
     return fetch('http://localhost:3001/api/v1/trips',
     {
@@ -27,4 +36,4 @@ function postNewTrip(inputObject) {
         throw new Error(err)
     })
 } 
-export { fetchData, postNewTrip }
+export { fetchData, fetchDataById, postNewTrip }
