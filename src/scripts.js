@@ -149,7 +149,7 @@ function displayPastTrips() {
 }
 
 function displayPendingTrips() {
-    pendingTrips.innerHTML = ` `;
+    pendingTrips.innerHTML = ``;
     allTrips.getPendingTrips().map((trip) => {
         const destinationById = allDestinations.getDestinationsByID(trip.destinationID);
         destinationById.map((destination) => {
@@ -175,8 +175,4 @@ function renderListOfDestinations() {
 function displayTotalSpending() {
     grandTotal.innerText = `$${allTrips.calculateTotalSpending()}`
     totalThisYear.innerText = `$${allTrips.calculateSpendingThisYear()}`
-}
-
-function generateRandomId() {
-    return Math.floor(Math.random() * allTravelers.listOfTravelers.length);
 }
