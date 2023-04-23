@@ -6,8 +6,8 @@ function fetchData(type) {
     })
 }
 
-function fetchDataById(id) {
-    return fetch(`http://localhost:3001/api/v1/travelers/${id}`)
+function fetchDataById(travelerId) {
+    return fetch(`http://localhost:3001/api/v1/travelers/${travelerId}`)
     .then(res => res.json())
     .catch(err => {
         throw new Error(err)

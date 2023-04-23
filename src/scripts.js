@@ -30,10 +30,10 @@ const loginUsername = document.getElementById('login-username');
 const loginPassword = document.getElementById('login-password');
 const dashboard = document.querySelector('.dashboard');
 
-let allTravelers, allTrips, allDestinations, randomId
+let allTravelers, allTrips, allDestinations, desiredTraveler, randomId
 
 window.addEventListener('load', loadLoginPage);
-loginBtn.addEventListener('click', loadDashboard)
+loginBtn.addEventListener('click', validateLoginInfo);
 inputFields.forEach((input) => input.addEventListener('input', displayEstimatedCost));
 submitBtn.addEventListener('click', renderNewTrip);
 
@@ -43,41 +43,38 @@ function loadLoginPage() {
 }
 
 function loadDashboard() {
-    if (validateLoginInfo() === false) {
-        alert("Invalid username and/or password");
-        return;
-    } else {
-        Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations'), fetchDataById(randomId)])
-        .then(data => {
-            allTravelers = new Travelers(data[0].travelers);
-            allTrips = new Trips(data[1].trips, data[2].destinations);
-            allDestinations = new Destinations(data[2].destinations);
-            user = data[3];
-        })
-        .then(() => {
-            loginPage.classList.add('hidden');
-            dashboard.classList.remove('hidden');
-            // randomId = generateRandomId();
-            displayName(randomId);
-            allTrips.getTripsByUserID(randomId);
-            displayPendingTrips();
-            displayPastTrips();
-            renderListOfDestinations();
-            displayTotalSpending();
-        })
-        .catch(err => alert(err))
-    }
+    Promise.all([fetchData('travelers'), fetchData('trips'), fetchData('destinations'), fetchDataById(randomId)])
+    .then(data => {
+        allTravelers = new Travelers(data[0].travelers);
+        allTrips = new Trips(data[1].trips, data[2].destinations);
+        allDestinations = new Destinations(data[2].destinations);            
+        desiredTraveler = data[3];
+    })
+    .then(() => {               
+        displayName(randomId);
+        allTrips.getTripsByUserID(randomId);
+        displayPendingTrips();
+        displayPastTrips();            
+        renderListOfDestinations();
+        displayTotalSpending();
+    })
+    .catch(err => alert(err))
 }
 
-function validateLoginInfo() {
-    if (loginUsername.value.slice(0, 8) === "traveler" && Number.isInteger(+loginUsername.value.slice(8)) && Number.isInteger(+loginUsername.value.slice(-2)) && !Number.isInteger(loginUsername.value.slice(-3)) && loginPassword.value === "travel") {
-        randomId = loginUsername.value.slice(-2);
-        return true;
-    } else if (loginUsername.value.slice(0, 8) === "traveler" && Number.isInteger(+loginUsername.value.slice(8)) && !Number.isInteger(+loginUsername.value.slice(-2)) && !Number.isInteger(loginUsername.value.slice(-3)) && loginPassword.value === "travel") {
-        randomId = loginUsername.value.slice(-1);
-        return true;
+function validateLoginInfo(event) {
+    event.preventDefault();
+    if (loginUsername.value.slice(0, 8) === "traveler" && Number.isInteger(+loginUsername.value.slice(8)) && Number.isInteger(+loginUsername.value.slice(-1)) && Number.isInteger(+loginUsername.value.slice(-2)) && !Number.isInteger(loginUsername.value.slice(-3)) && loginPassword.value === "travel") {
+        randomId = +loginUsername.value.slice(-2);
+        loginPage.classList.add('hidden');
+        dashboard.classList.remove('hidden'); 
+        loadDashboard();
+    } else if (loginUsername.value.slice(0, 8) === "traveler" && Number.isInteger(+loginUsername.value.slice(8)) && Number.isInteger(+loginUsername.value.slice(-1)) && !Number.isInteger(+loginUsername.value.slice(-2)) && !Number.isInteger(loginUsername.value.slice(-3)) && loginPassword.value === "travel") {
+        randomId = +loginUsername.value.slice(-1);
+        loginPage.classList.add('hidden');
+        dashboard.classList.remove('hidden'); 
+        loadDashboard();
     } else {
-        return false;
+        alert("Incorrect username and/or password");
     }
 }
 
