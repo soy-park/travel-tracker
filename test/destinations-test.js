@@ -108,4 +108,8 @@ describe("Destinations Class", () => {
     it('should find destination id given a destination', () => {
         expect(destinations.findIDByDestinationName("New York, New York")).to.equal(25)
     });
+
+    it('should calculate estimated cost given a destination id, duration, and travelers', () => {
+        expect(destinations.calculateEstimatedCost(22, 1, 1)).to.equal(814)
+    });
 })
