@@ -10,17 +10,19 @@ class Trips {
 
     getTripsByUserID(id) {
         const filteredTrips = this.listOfTrips.filter((trip) => trip.userID === id);
-        return filteredTrips.map((trip) => {
+        filteredTrips.map((trip) => {
             this.tripsByID.push(trip)
         })
+        return this.tripsByID;
     }
 
     getTodaysDate() {
         let currentDate = new Date();
-        let day = currentDate.getDate();
-        let month = currentDate.getMonth() + 1;
-        let year = currentDate.getFullYear();
-        let currentDateFormatted = `${year}/${month}/${day}`;
+        // let day = currentDate.getDate();
+        // let month = currentDate.getMonth() + 1;
+        // let year = currentDate.getFullYear();
+        // let currentDateFormatted = `${year}/${month}/${day}`;
+        let currentDateFormatted = moment(currentDate).format("YYYY/MM/DD")
         return currentDateFormatted;
     }
 

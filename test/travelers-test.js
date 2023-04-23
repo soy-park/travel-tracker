@@ -43,7 +43,7 @@ describe("Travelers Class", () => {
         expect(travelers).to.be.an.instanceOf(Travelers);
     });
   
-    it('should have a property that contains an array of destinations', () => {
+    it('should have a property that contains an array of travelers', () => {
         expect(travelers.listOfTravelers).to.deep.equal([
             {
             "id": 1,
@@ -70,5 +70,9 @@ describe("Travelers Class", () => {
             "name": "Tiffy Grout",
             "travelerType": "thrill-seeker"
         }])
+    })
+
+    it('should get name of traveler given an id', () => {
+        expect(travelers.getTravelerNameByID(1)).to.equal("Ham Leadbeater");
     });
 })

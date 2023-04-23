@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import Trips from "../src/trips";
 import Destinations from '../src/destinations';
+import moment from 'moment';
 
 describe("Trip Class", () => {
     let arrayOfTrips, trips, arrayOfDestinations, destinations
@@ -161,42 +162,54 @@ describe("Trip Class", () => {
         ])
     });
 
-    it('should get past trips', () => {
-        expect(trips.getPastTrips()).to.deep.equal([
-            {
-                "id": 3,
-                "userID": 3,
-                "destinationID": 22,
-                "travelers": 4,
-                "date": "2022/05/22",
-                "duration": 17,
-                "status": "approved",
-                "suggestedActivities": []
-            },
-            {
-                "id": 4,
-                "userID": 43,
-                "destinationID": 14,
-                "travelers": 2,
-                "date": "2022/02/25",
-                "duration": 10,
-                "status": "approved",
-                "suggestedActivities": []
-            },
-            {
-                "id": 5,
-                "userID": 42,
-                "destinationID": 29,
-                "travelers": 3,
-                "date": "2022/04/30",
-                "duration": 18,
-                "status": "pending",
-                "suggestedActivities": []
-            }
-        ])
+    it('should have a property of destinations that is equal to an instance of Destinations', () => {
+        expect(trips.destinations).to.deep.equal(destinations)
     });
 
-    it('should get upcoming trips', () => {
+    it('should get all trips given a user id', () => {
+        expect(trips.getTripsByUserID(44)).to.deep.equal([{
+            "id": 1,
+            "userID": 44,
+            "destinationID": 49,
+            "travelers": 1,
+            "date": "2023/09/16",
+            "duration": 8,
+            "status": "pending",
+            "suggestedActivities": []
+        }])
+    });
+
+    it('should get today\s date', () => {
+        expect(trips.getTodaysDate()).to.deep.equal(moment(new Date()).format("YYYY/MM/DD"))
+    });
+
+    it('should get past trips for a traveler', () => {
+        expect(trips.getTripsByUserID(44)).to.deep.equal([{
+            "id": 1,
+            "userID": 44,
+            "destinationID": 49,
+            "travelers": 1,
+            "date": "2023/09/16",
+            "duration": 8,
+            "status": "pending",
+            "suggestedActivities": []
+        }])
+
+        expect(trips.getPastTrips()).to.deep.equal([])
+    });
+
+    it('should get upcoming trips for a traveler', () => {
+        expect(trips.getTripsByUserID(44)).to.deep.equal([{
+            "id": 1,
+            "userID": 44,
+            "destinationID": 49,
+            "travelers": 1,
+            "date": "2023/09/16",
+            "duration": 8,
+            "status": "pending",
+            "suggestedActivities": []
+        }])
+        
         expect(trips.getUpcomingTrips()).to.deep.equal([{
             "id": 1,
             "userID": 44,
@@ -206,21 +219,22 @@ describe("Trip Class", () => {
             "duration": 8,
             "status": "pending",
             "suggestedActivities": []
-            },
-            {
-            "id": 2,
-            "userID": 35,
-            "destinationID": 25,
-            "travelers": 5,
-            "date": "2023/10/04",
-            "duration": 18,
-            "status": "pending",
-            "suggestedActivities": []
             }
         ])
     });
 
-    it('should get pending trips', () => {
+    it('should get pending trips for a traveler', () => {
+        expect(trips.getTripsByUserID(44)).to.deep.equal([{
+            "id": 1,
+            "userID": 44,
+            "destinationID": 49,
+            "travelers": 1,
+            "date": "2023/09/16",
+            "duration": 8,
+            "status": "pending",
+            "suggestedActivities": []
+        }])
+        
         expect(trips.getPendingTrips()).to.deep.equal([{
             "id": 1,
             "userID": 44,
@@ -230,25 +244,52 @@ describe("Trip Class", () => {
             "duration": 8,
             "status": "pending",
             "suggestedActivities": []
-            },
-            {
-            "id": 2,
-            "userID": 35,
-            "destinationID": 25,
-            "travelers": 5,
-            "date": "2023/10/04",
-            "duration": 18,
-            "status": "pending",
-            "suggestedActivities": []
             }
         ])
     });
 
-    it('should calculate total spending on trips', () => {
-        expect(trips.calculateTotalSpending(44)).to.equal(5819)
+    it('should get approved trips for a traveler', () => {
+        expect(trips.getTripsByUserID(44)).to.deep.equal([{
+            "id": 1,
+            "userID": 44,
+            "destinationID": 49,
+            "travelers": 1,
+            "date": "2023/09/16",
+            "duration": 8,
+            "status": "pending",
+            "suggestedActivities": []
+        }])
+        
+        expect(trips.getApprovedTrips()).to.deep.equal([])
     });
 
-    it('should not calculate total spending if given invalid id', () => {
-        expect(trips.calculateTotalSpending(100)).to.equal(0)
+    it('should calculate total spending on trips for a traveler', () => {
+        expect(trips.getTripsByUserID(44)).to.deep.equal([{
+            "id": 1,
+            "userID": 44,
+            "destinationID": 49,
+            "travelers": 1,
+            "date": "2023/09/16",
+            "duration": 8,
+            "status": "pending",
+            "suggestedActivities": []
+        }])
+        
+        expect(trips.calculateTotalSpending()).to.equal(5819)
+    });
+
+    it('should calculate spending this year for a traveler', () => {
+        expect(trips.getTripsByUserID(44)).to.deep.equal([{
+            "id": 1,
+            "userID": 44,
+            "destinationID": 49,
+            "travelers": 1,
+            "date": "2023/09/16",
+            "duration": 8,
+            "status": "pending",
+            "suggestedActivities": []
+        }])
+        
+        expect(trips.calculateSpendingThisYear()).to.equal(5819)
     });
 })

@@ -93,4 +93,23 @@ describe("Destinations Class", () => {
             }
         ]);
     });
+
+    it('should get a list of destinations given a destination id', () => {
+        expect(destinations.getDestinationsByID(25)).to.deep.equal([{
+            "id": 25,
+            "destination": "New York, New York",
+            "estimatedLodgingCostPerDay": 175,
+            "estimatedFlightCostPerPerson": 200,
+            "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+            "alt": "people crossing the street during the day surrounded by tall buildings and advertisements"
+        }])
+    });
+
+    it('should find destination id given a destination', () => {
+        expect(destinations.findIDByDestinationName("New York, New York")).to.equal(25)
+    });
+
+    it('should calculate estimated cost given a destination id, duration, and travelers', () => {
+        expect(destinations.calculateEstimatedCost(22, 1, 1)).to.equal(814)
+    });
 })
